@@ -12,26 +12,36 @@
  */
 // my solution
 // var twoSum = function(nums, target) {
-//     let len = nums.length;
-//     let res = [];
-//     for (let i = 0; i < len; i++){
-//         let t2 = nums.indexOf(target - nums[i]);
-//         if (t2 !== -1 && t2 !== i){
-//             res[0] = i;
-//             res[1] = t2;
-//             break;
-//         }
-//     }
-//     return res;
+//     
 // };
-// beats 93.23%
+
 var twoSum = function(nums, target) {
-    const map = {};
-    const len = nums.length;
+    //return mySolution(nums, target);
+    return solution1(nums, target);
+};
+
+var mySolution = function (nums, target){
+    let len = nums.length;
+    let res = [];
     for (let i = 0; i < len; i++){
-        const t2 = target - nums[i];
-        if (t2 in map){
-            return [map[t2], i];
+        let t2 = nums.indexOf(target - nums[i]);
+        if (t2 !== -1 && t2 !== i){
+            res[0] = i;
+            res[1] = t2;
+            break;
+        }
+    }
+    return res;
+}
+
+var solution1 = function(nums, target){
+    const len = nums.length;
+    let map = {}; //key: 数值 val：nums里的下标
+    for (let i = 0; i < len; i++){
+        let anotherNum = target - nums[i];
+        if (anotherNum in map){ //往前找，而不是往后找
+            // 这样就可以不用判断索引是否重复了
+            return [map[anotherNum], i];
         }
         map[nums[i]] = i;
     }
