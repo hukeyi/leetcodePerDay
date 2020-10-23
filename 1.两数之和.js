@@ -34,16 +34,16 @@ var mySolution = function (nums, target){
     return res;
 }
 
+// 97.1
 var solution1 = function(nums, target){
     const len = nums.length;
-    let map = {}; //key: 数值 val：nums里的下标
+    let hash = {};
     for (let i = 0; i < len; i++){
-        let anotherNum = target - nums[i];
-        if (anotherNum in map){ //往前找，而不是往后找
-            // 这样就可以不用判断索引是否重复了
-            return [map[anotherNum], i];
+        const other = target - nums[i];
+        if (other in hash){
+            return [hash[other], i];
         }
-        map[nums[i]] = i;
+        hash[nums[i]] = i;
     }
 }
 // @lc code=end

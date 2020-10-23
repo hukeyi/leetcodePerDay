@@ -12,52 +12,48 @@
 var moveZeroes = function(nums) {
     // return mySolution(nums);
     // return goodSolution(nums);
-    // return goodSolution2(nums);
-    return goodSolution3(nums);
+    return day2Solution3(nums);
 };
 
-// 97.13 21.93
-var goodSolution3 = function (nums){
-    const len = nums.length;
-    let j = 0;
-    for (let i = 0; i < len; i++){
-        if (nums[i] !== 0){
-            // let temp = nums[i];
-            // nums[i] = nums[j];
-            // nums[j++] = temp;
-            [nums[i], nums[j]] = [nums[j], nums[i]];
-            j++;
-        }
-    }
-}
-
-// 84.78 21.09
-var goodSolution = function(nums){
-    const len = nums.length;
-    let j = 0;
-    for (let i = 0; i < len; i++){
-        if (nums[i] !== 0){
-            nums[j] = nums[i];
-            if (i !== j){
-                nums[i] = 0;
-            }
-            j++;
-        }
-    }
-}
-
-// 71.5 5.8
-var goodSolution2 = function (nums){
+var day2Solution3 = function(nums) {
     const len = nums.length;
     let j = 0;
     for (let i = 0; i < len; i++){
         if (nums[j] === 0){
             nums.splice(j, 1);
-            nums[len - 1] = 0
+            nums[len - 1] = 0;
         }else{
             j++;
         }
     }
+    return nums;
+}
+
+var day2Solution1 = function(nums){
+    const len = nums.length;
+    let j = 0;
+    for (let i = 0; i < len; i++){
+        if (nums[i] !== 0){
+            nums[j] = nums[i];
+            if (i != j){
+                nums[i] = 0;
+            }
+            j++;
+        }
+    }
+    return nums;
+}
+
+var day2Solution2 = function(nums) {
+    const len = nums.length;
+    let j = 0; 
+    for (let i = 0; i < len; i++){
+        if (nums[i] !== 0){
+            [nums[i], nums[j]] = [nums[j], nums[i]];
+            j++;
+        }
+    }
+    return nums;
 }
 
 // 93.21 15.55

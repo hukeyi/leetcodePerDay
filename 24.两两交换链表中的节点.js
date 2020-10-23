@@ -16,30 +16,31 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-// 递归
+// 递归 92
 // var swapPairs = function(head) {
-//     if (head === null || head.next === null){
-//         return head;
-//     }
-//     let newHead = head.next;
-//     head.next = swapPairs(newHead.next);
-//     newHead.next = head;
-//     return newHead;
+//     if (!head || !head.next) return head;
+
+//     let n1 = head, n2 = head.next, n3 = n2.next;
+//     n2.next = head;
+//     n1.next = swapPairs(n3);
+//     return n2;
 // };
-// 迭代 91.54
+
+// 迭代 96.9 72ms
 var swapPairs = function(head) {
-    const dummyHead = new ListNode(0);
-    dummyHead.next = head;
-    let temp = dummyHead;
-    while (temp.next !== null && temp.next.next !== null) {
-        const node1 = temp.next;
-        const node2 = temp.next.next;
-        temp.next = node2;
-        node1.next = node2.next;
-        node2.next = node1;
-        temp = node1;
+    const dummy = new ListNode();
+    dummy.next = head;
+    let curr = dummy;
+
+    while (curr.next && curr.next.next){
+        let node1 = curr.next;
+        let node2 = curr.next.next;
+        node1.next = node2.next; //1-3-4
+        curr.next = node2; //dummy-2
+        node2.next = node1; //dummy-2-1-3-4
+        curr = node1; //curr-1
     }
-    return dummyHead.next;
+    return dummy.next;
 };
 // @lc code=end
 
