@@ -10,32 +10,17 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function(nums) {
-    // return mySolution(nums);
-    // return goodSolution(nums);
-    return day2Solution3(nums);
+    return solution3(nums);
 };
 
-var day2Solution3 = function(nums) {
-    const len = nums.length;
-    let j = 0;
-    for (let i = 0; i < len; i++){
-        if (nums[j] === 0){
-            nums.splice(j, 1);
-            nums[len - 1] = 0;
-        }else{
-            j++;
-        }
-    }
-    return nums;
-}
-
-var day2Solution1 = function(nums){
+// 99.39
+var solution1 = function(nums){
     const len = nums.length;
     let j = 0;
     for (let i = 0; i < len; i++){
         if (nums[i] !== 0){
             nums[j] = nums[i];
-            if (i != j){
+            if (i !== j){
                 nums[i] = 0;
             }
             j++;
@@ -44,12 +29,26 @@ var day2Solution1 = function(nums){
     return nums;
 }
 
-var day2Solution2 = function(nums) {
+var solution2 = function(nums){
     const len = nums.length;
-    let j = 0; 
+    let j = 0;
     for (let i = 0; i < len; i++){
         if (nums[i] !== 0){
             [nums[i], nums[j]] = [nums[j], nums[i]];
+            j++;
+        }
+    }
+    return nums;
+}
+
+var solution3 = function(nums){
+    const len = nums.length;
+    let j = 0;
+    for (let i = 0; i < len; i++){
+        if (nums[j] === 0){
+            nums.splice(j, 1);
+            nums[len - 1] = 0;
+        }else{
             j++;
         }
     }

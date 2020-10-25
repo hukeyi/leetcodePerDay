@@ -11,10 +11,10 @@
  */
 var plusOne = function (digits){
     //return mySolution(digits);
-    return solution2(digits);
+    return goodSolution1(digits);
 };
 
-var solution2 = function (digits){
+var goodSolution1 = function (digits){
     const len = digits.length;
     for (let i = len - 1; i >= 0; i--){
         if (digits[i] < 9){
@@ -23,9 +23,8 @@ var solution2 = function (digits){
         }
         digits[i] = 0;
     }
-    let ans = new Array(len + 1).fill(0);
-    ans[0] = 1;
-    return ans;
+    digits.unshift(1);
+    return digits;
 }
 
 // my solution
@@ -44,21 +43,6 @@ var mySolution = function(digits) {
         }
         digits[pos] = 0;
     }
-};
-
-// best: 98.84 7.71
-var solution1 = function (digits) {
-    const len = digits.length;
-    for (let i = len - 1; i >= 0; i--){
-        if (digits[i] < 9) {
-            digits[i]++;
-            return digits;
-        }
-        digits[i] = 0;
-    }
-    let newNum = Array(len + 1).fill(0);
-    newNum[0] = 1;
-    return newNum;
 };
 // @lc code=end
 
