@@ -17,8 +17,20 @@
 
 var twoSum = function(nums, target) {
     //return mySolution(nums, target);
-    return solution1(nums, target);
+    return goodSolution1(nums, target);
 };
+
+var goodSolution1 = function (nums, target){
+    const len = nums.length;
+    let hash = {};
+    for (let i = 0; i < len; i++){
+        const other = target - nums[i];
+        if (other in hash){
+            return [hash[other], i];
+        }
+        hash[nums[i]] = i;
+    }
+}
 
 var mySolution = function (nums, target){
     let len = nums.length;
@@ -32,19 +44,6 @@ var mySolution = function (nums, target){
         }
     }
     return res;
-}
-
-// 97.1
-var solution1 = function(nums, target){
-    const len = nums.length;
-    let hash = {};
-    for (let i = 0; i < len; i++){
-        const other = target - nums[i];
-        if (other in hash){
-            return [hash[other], i];
-        }
-        hash[nums[i]] = i;
-    }
 }
 // @lc code=end
 
