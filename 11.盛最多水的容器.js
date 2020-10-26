@@ -10,28 +10,31 @@
  * @return {number}
  */
 var maxArea = function(height) {
-    return solution2(height);
+    return mysolution2(height);
 };
 
-var solution1 = function(height){
-    let max = 0;
+var mysolution1 = function (height){
+    // two loop
     const len = height.length;
-    for (let i = 0; i < len; i++){
+    let max = 0;
+    for (let i = 0; i < len - 1; i++){
         for (let j = i + 1; j < len; j++){
-            const ans = (j - i) * Math.min(height[i], height[j]);
-            max = ans > max ? ans : max;
+            let area = (j - i) * Math.min(height[i], height[j]);
+            max = Math.max(max, area);
         }
     }
     return max;
 }
 
-var solution2 = function (height){
-    let max = 0, minHeight, area;
+var mysolution2 = function (height){
+    // 夹逼
     const len = height.length;
-    for (let i = 0, j = len - 1; i < j; ){
-        minHeight = height[i] < height[j] ? height[i++] : height[j--];
-        area = (j - i + 1) * minHeight;
-        max = Math.max(max, area);
+    let left = 0, right = len - 1;
+    let max = 0, minHeight, area;
+    while (left < right){
+        minHeight = height[left] < height[right] ? height[left++] : height[right--];
+        area = minHeight * (right - left + 1);
+        max = Math.max(area, max);
     }
     return max;
 }

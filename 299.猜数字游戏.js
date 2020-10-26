@@ -11,43 +11,42 @@
  * @return {string}
  */
 var getHint = function(secret, guess) {
-    return goodSolution(secret, guess);
+    return solution2(secret, guess);
 };
-
-var goodSolution = function (secret, guess){
+// o(n)
+var solution1 = function (secret, guess){
     const len = secret.length;
-    let a = b = 0;
+    let bulls = cows = 0;
     let numbers = new Array(10).fill(0);
-
     for (let i = 0; i < len; i++){
         if (secret[i] === guess[i]){
-            a++;
+            bulls++;
         }else{
-            if (numbers[secret[i]]++ < 0) b++;
-            if (numbers[guess[i]]-- > 0) b++;
+            if (numbers[secret[i]]++ < 0) cows++;
+            if (numbers[guess[i]]-- > 0) cows++;
         }
     }
-    return a + "A" + b + "B";
+    return bulls + "A" + cows + "B";
 }
-
-var goodSolution2 = function (secret, guess){
-    let a = b = 0;
+// o(n)
+var solution2 = function (secret, guess){
     const len = secret.length;
-    let num1 = new Array(10).fill(0);
-    let num2 = new Array(10).fill(0);
+    let bulls = cows = 0;
+    let nums1 = new Array(10).fill(0);
+    let nums2 = new Array(10).fill(0);
 
     for (let i = 0; i < len; i++){
         if (secret[i] === guess[i]){
-            a++;
+            bulls++;
         }else{
-            num1[secret[i]]++;
-            num2[guess[i]]++;
+            nums1[secret[i]]++;
+            nums2[guess[i]]++;
         }
     }
     for (let i = 0; i < 10; i++){
-        b += Math.min(num1[i], num2[i]);
+        cows += Math.min(nums1[i], nums2[i]);
     }
-    return a + "A" + b + "B";
+    return bulls + "A" + cows + "B";
 }
 // @lc code=end
 

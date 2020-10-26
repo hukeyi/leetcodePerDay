@@ -11,8 +11,32 @@
  */
 var removeDuplicates = function(nums) {
     // return mySolution(nums);
-    return goodSolution(nums);
+    return solution2(nums);
 };
+
+// 99.21
+var solution1 = function(nums){
+    let j = 0; //指向当前不重复数组的最后一个元素
+    for (let i = 1; i < nums.length; i++){
+        if (nums[i] !== nums[i - 1]){
+        // if (nums[i] !== nums[j]){ // 这样更快
+            nums[++j] = nums[i];
+        }
+    }
+    return j + 1;
+}
+
+var solution2 = function (nums){
+    let slow = 0, fast = 1; //slow指向当前不重复数组的最后一个元素
+    const len = nums.length;
+    while (fast < len){
+        if (nums[slow] !== nums[fast]){
+            nums[++slow] = nums[fast];
+        }
+        fast++;
+    }
+    return slow + 1;
+}
 
 // 空间复杂度不符合题目要求
 var mySolution = function(nums){
@@ -25,18 +49,6 @@ var mySolution = function(nums){
         }
     }
     return nums.length;
-}
-
-var goodSolution = function(nums){
-    let slow = 0, fast = 1;
-    const len = nums.length;
-    while (fast < len){
-        if (nums[slow] !== nums[fast]){
-            nums[++slow] = nums[fast];
-        }
-        fast++;
-    }
-    return slow + 1;
 }
 // @lc code=end
 

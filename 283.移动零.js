@@ -10,38 +10,10 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function(nums) {
-    return solution3(nums);
+    return mysolution3(nums);
 };
 
-// 99.39
-var solution1 = function(nums){
-    const len = nums.length;
-    let j = 0;
-    for (let i = 0; i < len; i++){
-        if (nums[i] !== 0){
-            nums[j] = nums[i];
-            if (i !== j){
-                nums[i] = 0;
-            }
-            j++;
-        }
-    }
-    return nums;
-}
-
-var solution2 = function(nums){
-    const len = nums.length;
-    let j = 0;
-    for (let i = 0; i < len; i++){
-        if (nums[i] !== 0){
-            [nums[i], nums[j]] = [nums[j], nums[i]];
-            j++;
-        }
-    }
-    return nums;
-}
-
-var solution3 = function(nums){
+var mysolution1 = function (nums){
     const len = nums.length;
     let j = 0;
     for (let i = 0; i < len; i++){
@@ -52,7 +24,33 @@ var solution3 = function(nums){
             j++;
         }
     }
-    return nums;
+}
+
+var mysolution2 = function (nums){
+    const len = nums.length;
+    let j = 0;
+    for (let i = 0; i < len; i++){
+        if (nums[i] !== 0){
+            nums[j] = nums[i];
+            if (i !== j){ 
+                // 说明前面有零或者已经把非零数遍历完了
+                // 把前面的零放到后面
+                nums[i] = 0;
+            }
+            j++;
+        }
+    }
+}
+
+var mysolution3 = function (nums){
+    const len = nums.length;
+    let j = 0;
+    for (let i = 0; i < len; i++){
+        if (nums[i] !== 0){
+            [nums[i], nums[j]] = [nums[j], nums[i]];
+            j++;
+        }
+    }
 }
 
 // 93.21 15.55
