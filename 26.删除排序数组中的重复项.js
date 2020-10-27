@@ -10,9 +10,19 @@
  * @return {number}
  */
 var removeDuplicates = function(nums) {
-    // return mySolution(nums);
-    return solution2(nums);
+    return mySolution(nums);
 };
+
+// 快慢指针 i-fast j-slow
+var mysolution = function (nums){
+    let j = 0;
+    for (let i = 1; i < nums.length; i++){
+        if (nums[i] !== nums[j]){
+            nums[++j] = nums[i];
+        }
+    }
+    return j + 1;
+}
 
 // 99.21
 var solution1 = function(nums){
@@ -24,18 +34,6 @@ var solution1 = function(nums){
         }
     }
     return j + 1;
-}
-
-var solution2 = function (nums){
-    let slow = 0, fast = 1; //slow指向当前不重复数组的最后一个元素
-    const len = nums.length;
-    while (fast < len){
-        if (nums[slow] !== nums[fast]){
-            nums[++slow] = nums[fast];
-        }
-        fast++;
-    }
-    return slow + 1;
 }
 
 // 空间复杂度不符合题目要求

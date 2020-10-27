@@ -11,10 +11,10 @@
  */
 var plusOne = function (digits){
     //return mySolution(digits);
-    return goodSolution1(digits);
+    return solution1(digits);
 };
 
-var goodSolution1 = function (digits){
+var solution1 = function (digits){
     const len = digits.length;
     for (let i = len - 1; i >= 0; i--){
         if (digits[i] < 9){
