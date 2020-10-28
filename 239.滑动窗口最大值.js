@@ -11,22 +11,23 @@
  * @return {number[]}
  */
 var maxSlidingWindow = function(nums, k) {
-    return solution2(nums, k);
+    return mysolution2(nums, k);
 };
 
 // 暴力解法 超时
-var solution1 = function(nums, k){
+var mysolution1 = function(nums, k) {
+    const len = nums.length - k + 1;
     let res = [];
-    const len = nums.length;
-    for (let i = 0; i < len - k + 1; i++){
-        let temp = nums.slice(i, i + k);
+    for (let i = 0; i < len; i++){
+        const temp = nums.slice(i, i + k);
         res.push(Math.max(...temp));
     }
     return res;
 }
 
-// 双端队列
-var solution2 = function(nums, k){
+// 双端队列，队列内下标由小到大递减
+// 窗口左边界和右边界各用一个变量
+var mysolution2 = function(nums, k){
     const len = nums.length;
     if(len < 2) return nums;
 

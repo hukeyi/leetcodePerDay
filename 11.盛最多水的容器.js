@@ -10,30 +10,32 @@
  * @return {number}
  */
 var maxArea = function(height) {
-    return mysolution2(height);
+    return solution2(height);
 };
 
-var mysolution1 = function (height){
-    // two loop
+// 暴力，2 loop，find max
+var solution1 = function(height){
     const len = height.length;
     let max = 0;
     for (let i = 0; i < len - 1; i++){
         for (let j = i + 1; j < len; j++){
-            let area = (j - i) * Math.min(height[i], height[j]);
-            max = Math.max(max, area);
+            const minHeight = Math.min(height[i], height[j]);
+            let area = (j - i) * minHeight;
+            max = Math.max(area, max);
         }
     }
     return max;
 }
 
-var mysolution2 = function (height){
-    // 夹逼
+// 夹逼，左右边界收敛
+// 左右边界中，较小的那个往中间收敛，直到相撞
+var solution2 = function(height){
     const len = height.length;
     let left = 0, right = len - 1;
-    let max = 0, minHeight, area;
+    let max = 0;
     while (left < right){
-        minHeight = height[left] < height[right] ? height[left++] : height[right--];
-        area = minHeight * (right - left + 1);
+        let minHeight = height[left] < height[right] ? height[left++] : height[right--];
+        let area = (right - left + 1) * minHeight;
         max = Math.max(area, max);
     }
     return max;

@@ -11,40 +11,30 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    return solution2(s, t);
+    return mysolution2(s, t);
 };
 
+// 排序
 // o(nlogn)
-var solution2 = function(s, t){
+var mysolution1 = function(s, t){
     if (s.length !== t.length) return false;
-
-    let s_arr = s.split("").sort().join("");
-    let t_arr = t.split("").sort().join("");
-    if (s_arr === t_arr) return true;
-    else return false;
+    
+    let sort_s = s.split('').sort().join('');
+    let sort_t = t.split('').sort().join('');
+    return sort_s === sort_t;
 }
 
-// o(3n)
-var mySolution = function(s, t){
-    if (s === t) return true;
+// 哈希表，一个
+var mysolution2 = function(s, t){
     if (s.length !== t.length) return false;
 
-    const len = s.length;
     let hash = {};
+    const len = s.length;
     for (let i = 0; i < len; i++){
-        if (s[i] in hash){
-            hash[s[i]]++;
-        }else{
-            hash[s[i]] = 1;
-        }
+        hash[s[i]] = (s[i] in hash) ? hash[s[i]] + 1 : 1;
+        hash[t[i]] = (t[i] in hash) ? hash[t[i]] - 1 : -1;
     }
-    for (let j = 0; j < len; j++){
-        if (t[j] in hash && hash[t[j]] > 0){
-            hash[t[j]]--;
-        }else{
-            return false;
-        }
-    }
+
     for (let key in hash){
         if (hash[key] !== 0) return false;
     }

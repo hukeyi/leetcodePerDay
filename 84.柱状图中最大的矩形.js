@@ -10,36 +10,35 @@
  * @return {number}
  */
 var largestRectangleArea = function(heights) {
-    return mysolution1(heights);
+    // return solution1(heights);
+    return solution2(heights);
 };
 
-// 暴力解法：832ms 36.22%
-var mysolution1 = function(heights){
+// 暴力解法
+// 固定一个柱子，从柱子开始向左右散开，直到碰到比柱子矮的就停止
+var solution1 = function(heights){
     const len = heights.length;
-    if (len === 0) return 0;
-    if (len === 1) return heights[0];
-
-    // loop every i, find the max area for every i
     let max = 0;
     for (let i = 0; i < len; i++){
+        let curr = heights[i];
         let left = i - 1, right = i + 1;
-        while (left >= 0 && heights[i] <= heights[left]){
+        while (left >= 0 && heights[left] >= curr){
             left--;
         }
-        while (right <= len - 1 && heights[i] <= heights[right]){
+        while (right <= len - 1 && heights[right] >= curr){
             right++;
         }
-        let imax = (right - left -  1) * heights[i];
-        max = Math.max(imax, max);
+        max = Math.max(max, (right - left - 1) * curr);
     }
     return max;
 }
 
+// 单调栈，单调递增
 var mysolution2 = function(heights){
     let max = 0;
     let stack = [];
-    heights.unshift(0);
-    heights.push(0);
+    heights.unshift(0); //避免溢出，处理heights[0]的左边界
+    heights.push(0); //处理heights[len-1]的右边界
     const len = heights.length;
     for (let i = 0; i < len; i++){
         // 当栈顶元素比新元素大，则说明栈顶元素的左右边界可以确定了，则它的最大面积也可以确定了
