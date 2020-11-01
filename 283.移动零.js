@@ -10,44 +10,43 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function(nums) {
-    return mysolution3(nums);
+    return solution3(nums);
 };
 
-var mysolution1 = function (nums){
+// 直接删
+var solution1 = function(nums){
     const len = nums.length;
     let j = 0;
     for (let i = 0; i < len; i++){
         if (nums[j] === 0){
             nums.splice(j, 1);
-            nums[len - 1] = 0;
+            nums.push(0);
         }else{
             j++;
         }
     }
 }
 
-var mysolution2 = function (nums){
-    const len = nums.length;
-    let j = 0;
-    for (let i = 0; i < len; i++){
-        if (nums[i] !== 0){
-            nums[j] = nums[i];
-            if (i !== j){ 
-                // 说明前面有零或者已经把非零数遍历完了
-                // 把前面的零放到后面
-                nums[i] = 0;
-            }
-            j++;
-        }
-    }
-}
-
-var mysolution3 = function (nums){
+var solution2 = function(nums){
     const len = nums.length;
     let j = 0;
     for (let i = 0; i < len; i++){
         if (nums[i] !== 0){
             [nums[i], nums[j]] = [nums[j], nums[i]];
+            j++;
+        }
+    }
+}
+
+var solution3 = function(nums){
+    const len = nums.length;
+    let j = 0;
+    for (let i = 0; i < len; i++){
+        if (nums[i] !== 0){
+            nums[j] = nums[i];
+            if (i !== j){
+                nums[i] = 0;
+            }
             j++;
         }
     }

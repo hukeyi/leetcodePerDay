@@ -11,31 +11,29 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    return mysolution2(s, t);
+    return solution2(s, t);
 };
 
-// 排序
+// sort and compare
 // o(nlogn)
-var mysolution1 = function(s, t){
+var solution1 = function (s, t){
     if (s.length !== t.length) return false;
-    
-    let sort_s = s.split('').sort().join('');
-    let sort_t = t.split('').sort().join('');
-    return sort_s === sort_t;
+
+    return s.split("").sort().join('') === t.split('').sort().join('');
 }
 
-// 哈希表，一个
-var mysolution2 = function(s, t){
+// 哈希表，记录频次，一个加一个减，最后检查是否hash表均为0
+var solution2 = function(s, t){
     if (s.length !== t.length) return false;
 
     let hash = {};
     const len = s.length;
     for (let i = 0; i < len; i++){
-        hash[s[i]] = (s[i] in hash) ? hash[s[i]] + 1 : 1;
-        hash[t[i]] = (t[i] in hash) ? hash[t[i]] - 1 : -1;
+        hash[s[i]] = s[i] in hash ? hash[s[i]] + 1 : 1;
+        hash[t[i]] = t[i] in hash ? hash[t[i]] - 1 : -1;
     }
 
-    for (let key in hash){
+    for (let key in hash) {
         if (hash[key] !== 0) return false;
     }
     return true;
