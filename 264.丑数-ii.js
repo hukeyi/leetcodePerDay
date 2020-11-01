@@ -1,19 +1,21 @@
 /*
- * @lc app=leetcode.cn id=347 lang=javascript
+ * @lc app=leetcode.cn id=264 lang=javascript
  *
- * [347] 前 K 个高频元素
+ * [264] 丑数 II
  */
 
 // @lc code=start
 /**
- * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
+ * @param {number} n
+ * @return {number}
  */
 class minHeap{
     constructor(size = 0){
         this.heap = [];
         this.size = size; //当前存储的元素个数
+    }
+    print(){
+        console.log(this.heap);
     }
     // 返回元素个数
     getSize(){
@@ -123,42 +125,20 @@ class minHeap{
     }
 }
 
-var topKFrequent = function(nums, k) {
-    return solution1(nums, k);
-};
-
-// 1. 哈希表：遍历一次记录出现频率
-// 2. 最小堆
-// o(nlogk) 200ms
-var solution1 = function(nums , k){
-    let hash = {}, res = [];
-    const len = nums.length;
-    // hash table: key-数 val-出现频率
-    for (let i = 0; i < len; i++){
-        hash[nums[i]] = (nums[i] in hash) ? hash[nums[i]] + 1 : 1;
-    }
-
-    // 放入堆
+var nthUglyNumber = function(n) {
     let minheap = new minHeap();
-    for (let key in hash){
-        let obj = new Object();
-        obj[key] = hash[key];
-
-        if (minheap.getSize() < k){
-            minheap.insert(obj);
-        }else{
-            if (obj[key] > minheap.topValue()){
-                minheap.removeTop();
-                minheap.insert(obj);
-            }
+    let ans = 1;
+    for (let i = 1; i < n; i++){
+        minheap.insert(ans * 2);
+        minheap.insert(ans * 3);
+        minheap.insert(ans * 5);
+        ans = minheap.top();
+        minheap.removeTop();
+        while (minheap.getSize() && ans === minheap.top()){
+            minheap.removeTop();
         }
     }
-    while (k--){
-        let key = Object.keys(minheap.top());
-        minheap.removeTop();
-        res.push(Number(key[0]));
-    }
-    return res;
-}
+    return ans;
+};
 // @lc code=end
 

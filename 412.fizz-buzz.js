@@ -12,57 +12,28 @@ const { RSA_NO_PADDING } = require("constants");
  * @return {string[]}
  */
 var fizzBuzz = function(n) {
-    return solution3(n);
+    return mysolution2(n);
 };
 
-// 自由映射：哈希表 o(n)
-// 为了保证输出正确顺序的字符串，使用Map
-var solution3 = function(n){
-    let hashmap = new Map();
-    hashmap.set(3, 'Fizz');
-    hashmap.set(5, 'Buzz');
-    let res = [];
-
-    for (let i = 1; i <= n; i++){
-        let ans = "";
-        for (let [key, value] of hashmap){
-            if (i % key === 0){
-                ans += value;
-            }
-        }
-        if (ans === ""){
-            ans = JSON.stringify(i);
-        }
-        res.push(ans);
-    }
-    return res;
-}
-
-// 暴力 1 loop o(n)
-var solution1 = function(n){
+var mysolution1 = function(n){
     let res = [];
     for (let i = 1; i <= n; i++){
-        if ((i % 3) !== 0 && (i % 5) !== 0){
-            res.push(JSON.stringify(i));
-            continue;
-        }
-        if (i % 3 === 0){
-            if (i % 5 === 0){
-                res.push("FizzBuzz");
-            }else{
-                res.push("Fizz");
-            }
-        }else{
+        if (i % 3 === 0 && i % 5 === 0){
+            res.push("FizzBuzz");
+        }else if (i % 3 === 0){
+            res.push("Fizz");
+        }else if (i % 5 === 0){
             res.push("Buzz");
+        }else{
+            res.push(i.toString());
         }
     }
     return res;
 }
 
-// 暴力：字符串连接，减少条件判断
-var solution2 = function(n){
+var mysolution2 = function(n){
     let res = [];
-    for (let i = 1; i <= n; i++){
+    for(let i = 1; i <= n; i++){
         let ans = "";
         if (i % 3 === 0){
             ans += "Fizz";
@@ -71,7 +42,27 @@ var solution2 = function(n){
             ans += "Buzz";
         }
         if (ans === ""){
-            ans = JSON.stringify(i);
+            ans += i.toString();
+        }
+        res.push(ans);
+    }
+    return res;
+}
+
+var mysolution3 = function(n){
+    let hashmap = new Map();
+    hashmap.set(3, "Fizz");
+    hashmap.set(5, "Buzz");
+    let res = [];
+    for (let i = 1; i <= n; i++){
+        let ans = "";
+        for (let [key, val] of hashmap){
+            if (i % key === 0){
+                ans += val;
+            }
+        }
+        if (ans === ""){
+            ans = i.toString();
         }
         res.push(ans);
     }

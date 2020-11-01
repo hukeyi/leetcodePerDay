@@ -12,33 +12,30 @@
  */
 var intersect = function(nums1, nums2) {
     // return sortSolution(nums1, nums2);
-    return mysolution2(nums1, nums2);
+    return solution2(nums1, nums2);
 };
 
-// 无序 哈希表 一个
-var mysolution1 = function(nums1, nums2){
+var solution1 = function (nums1, nums2){
     const len1 = nums1.length, len2 = nums2.length;
     if (len1 > len2){
-        return mysolution1(nums2, nums1);
+        return solution1(nums2, nums1);
     }
     let hash = {}, res = [];
     for (let i = 0; i < len1; i++){
-        hash[nums1[i]] = (nums1[i] in hash) ? hash[nums1[i]] + 1 : 1;
+        hash[nums1[i]] = nums1[i] in hash ? hash[nums1[i]] + 1 : 1;
     }
     for (let j = 0; j < len2; j++){
         if (nums2[j] in hash && hash[nums2[j]] > 0){
-            res.push(nums2[j]);
             hash[nums2[j]]--;
+            res.push(nums2[j]);
         }
     }
     return res;
 }
 
-// 有序 双指针
-var mysolution2 = function(nums1, nums2){
+var solution2 = function(nums1, nums2){
     nums1.sort((a, b) => { return a - b; });
     nums2.sort((a, b) => { return a - b; });
-
     const len1 = nums1.length, len2 = nums2.length;
     let p1 = p2 = 0;
     let res = [];

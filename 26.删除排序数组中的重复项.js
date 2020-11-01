@@ -10,26 +10,25 @@
  * @return {number}
  */
 var removeDuplicates = function(nums) {
-    return mySolution(nums);
+    return solution1(nums);
 };
 
-// 快慢指针 i-fast j-slow
-var mysolution = function (nums){
-    let j = 0;
-    for (let i = 1; i < nums.length; i++){
-        if (nums[i] !== nums[j]){
-            nums[++j] = nums[i];
+var solution1 = function (nums){
+    const len = nums.length;
+    let j = 1;
+    for (let i = 1; i < len; i++){
+        if (nums[i] !== nums[i - 1]){
+            nums[j++] = nums[i];
         }
     }
-    return j + 1;
+    return j;
 }
 
-// 99.21
-var solution1 = function(nums){
-    let j = 0; //指向当前不重复数组的最后一个元素
-    for (let i = 1; i < nums.length; i++){
-        if (nums[i] !== nums[i - 1]){
-        // if (nums[i] !== nums[j]){ // 这样更快
+var solution2 = function (nums){
+    const len = nums.length;
+    let j = 0;
+    for (let i = 0; i < len; i++){
+        if (nums[i] !== nums[j]){
             nums[++j] = nums[i];
         }
     }

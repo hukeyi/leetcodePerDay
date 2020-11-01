@@ -12,14 +12,28 @@
  */
 
 var rotate = function (nums, k){
-    rotate1(nums, k);
+    solution2(nums, k);
 }
 
-// 暴力，pop数组末尾，然后push到队前
-var rotate1 = function(nums, k){
-    while(k--){
+var solution1 = function(nums, k){
+    while (k--){
         nums.unshift(nums.pop());
     }
+}
+
+var reverse1 = function(nums, start, end){
+    while (start < end){
+        [nums[start], nums[end]] = [nums[end], nums[start]];
+        start++;
+        end--;
+    }
+}
+var solution2 = function(nums, k){
+    const len = nums.length;
+    k %= len;
+    reverse1(nums, 0, len - 1);
+    reverse1(nums, 0, k - 1);
+    reverse1(nums, k, len - 1);
 }
 
 // 环状替代
@@ -37,27 +51,6 @@ var rotate2 = function (nums, k){
             count++;
         }while(start != cur);
     }
-}
-
-// 反转
-var reverse = function (nums, start, end){
-    while (start < end){
-        [nums[start], nums[end]] = [nums[end], nums[start]];
-        start++;
-        end--;
-    }
-}
-
-// e.g. 1,2,3,4,5 k=2
-// 先将所有数字反转
-// 5,4,3,2,1
-//然后反转0-1: 4,5,3,2,1
-// 然后反转2-4: 4，5，1，2，3
-var rotate3 = function (nums, k){
-    k %= nums.length;
-    reverse(nums, 0, nums.length - 1);
-    reverse(nums, 0, k - 1);
-    reverse(nums, k, nums.length - 1);
 }
 // @lc code=end
 
