@@ -18,39 +18,38 @@
  * @return {number[]}
  */
 var preorder = function(root) {
-    return solution2(root);
+    return mysolution2(root);
 };
 
 // 递归
-var solution1 = function(root){
-    if (!root) return [];
+var mysolution1 = function(root){
     let res = [];
+    if (!root) return res;
 
     const pre = (root) => {
-        if (!root) return [];
+        if (!root) return;
         res.push(root.val);
-        let children = root.children;
-        const len = children.length;
-        for (let i = 0; i < len; i++){
-            pre(children[i]);
-        }
+        root.children.forEach(child => {
+            pre(child);
+        })
     }
     pre(root);
     return res;
 }
 
-// 迭代：BFS
-var solution2 = function(root){
-    let res = [], s = [];
+// BFS
+var mysolution2 = function(root){
+    let res = [];
     if (!root) return res;
-    s.push(root);
 
-    while (s.length){
-        let curr = s.pop(); //栈顶出栈
+    let stack = [];
+    stack.push(root);
+    while (stack.length){
+        let curr = stack.pop();
         res.push(curr.val);
-        const len = curr.children.length;
-        for (let i = len - 1; i >= 0; i--){ //注意：需要从后往前压入栈
-            s.push(curr.children[i]);
+        let len = curr.children.length;
+        while (len--){
+            stack.push(curr.children[len]);
         }
     }
     return res;

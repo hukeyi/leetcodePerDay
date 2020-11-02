@@ -12,10 +12,11 @@ const { RSA_NO_PADDING } = require("constants");
  * @return {string[]}
  */
 var fizzBuzz = function(n) {
-    return mysolution2(n);
+    return solution2(n);
 };
 
-var mysolution1 = function(n){
+// 暴力
+var solution1 = function(n){
     let res = [];
     for (let i = 1; i <= n; i++){
         if (i % 3 === 0 && i % 5 === 0){
@@ -31,9 +32,9 @@ var mysolution1 = function(n){
     return res;
 }
 
-var mysolution2 = function(n){
+var solution2 = function(n){
     let res = [];
-    for(let i = 1; i <= n; i++){
+    for (let i = 1; i <= n; i++){
         let ans = "";
         if (i % 3 === 0){
             ans += "Fizz";
@@ -42,23 +43,24 @@ var mysolution2 = function(n){
             ans += "Buzz";
         }
         if (ans === ""){
-            ans += i.toString();
+            ans = i.toString();
         }
         res.push(ans);
     }
     return res;
 }
 
-var mysolution3 = function(n){
+// 自由映射关系
+var solution3 = function(n){
     let hashmap = new Map();
     hashmap.set(3, "Fizz");
     hashmap.set(5, "Buzz");
     let res = [];
     for (let i = 1; i <= n; i++){
         let ans = "";
-        for (let [key, val] of hashmap){
+        for (let key of hashmap){
             if (i % key === 0){
-                ans += val;
+                ans += hashmap[key];
             }
         }
         if (ans === ""){

@@ -125,20 +125,21 @@ class minHeap{
     }
 }
 
-var nthUglyNumber = function(n) {
-    let minheap = new minHeap();
+var nthUglyNumber = function(n){
+    let heap = new minHeap();
     let ans = 1;
-    for (let i = 1; i < n; i++){
-        minheap.insert(ans * 2);
-        minheap.insert(ans * 3);
-        minheap.insert(ans * 5);
-        ans = minheap.top();
-        minheap.removeTop();
-        while (minheap.getSize() && ans === minheap.top()){
-            minheap.removeTop();
+    while (--n){
+        heap.insert(ans * 2);
+        heap.insert(ans * 3);
+        heap.insert(ans * 5);
+        ans = heap.top();
+        heap.removeTop();
+        // reduce repeat
+        while (heap.getSize() && ans === heap.top()){
+            heap.removeTop();
         }
     }
     return ans;
-};
+}
 // @lc code=end
 

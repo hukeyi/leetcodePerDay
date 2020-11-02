@@ -16,27 +16,25 @@
  * @param {TreeNode} root
  * @return {number}
  */
-// 递归：95.02%
-// 树的深度等于左子树和右子树最大高度+1
-var maxDepth = function(root) {
-    if (!root) return 0;
-    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
-};
+// 递归
+// var maxDepth = function (root) {
+//     if (!root) return 0;
+//     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+// }
 
-// 广度优先搜索
-var maxDepth1 = function(root){
+// 迭代：BFS 队列
+var maxDepth = function(root){
     if (!root) return 0;
 
     let queue = [];
     queue.push(root);
     let res = 0;
-    while (queue.length !== 0){
+    while (queue.length){
         let size = queue.length;
-        while (size > 0){
+        while (size--){ //一整层
             let curr = queue.shift();
             if (curr.left) queue.push(curr.left);
             if (curr.right) queue.push(curr.right);
-            size--;
         }
         res++;
     }

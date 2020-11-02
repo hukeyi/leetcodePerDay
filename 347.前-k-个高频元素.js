@@ -124,39 +124,35 @@ class minHeap{
 }
 
 var topKFrequent = function(nums, k) {
-    return solution1(nums, k);
+    return mysolution1(nums, k);
 };
 
-// 1. 哈希表：遍历一次记录出现频率
-// 2. 最小堆
-// o(nlogk) 200ms
-var solution1 = function(nums , k){
-    let hash = {}, res = [];
+var mysolution1 = function(nums, k){
     const len = nums.length;
-    // hash table: key-数 val-出现频率
+    let hash = {};
     for (let i = 0; i < len; i++){
-        hash[nums[i]] = (nums[i] in hash) ? hash[nums[i]] + 1 : 1;
+        hash[nums[i]] = nums[i] in hash ? hash[nums[i]] + 1 : 1;
     }
-
-    // 放入堆
-    let minheap = new minHeap();
+    
+    let heap = new minHeap();
     for (let key in hash){
         let obj = new Object();
         obj[key] = hash[key];
 
-        if (minheap.getSize() < k){
-            minheap.insert(obj);
+        if (heap.getSize() < k){
+            heap.insert(obj);
         }else{
-            if (obj[key] > minheap.topValue()){
-                minheap.removeTop();
-                minheap.insert(obj);
+            if (obj[key] > heap.topValue()){
+                heap.removeTop();
+                heap.insert(obj);
             }
         }
     }
+    let res = [];
     while (k--){
-        let key = Object.keys(minheap.top());
-        minheap.removeTop();
-        res.push(Number(key[0]));
+        let key = Object.keys(heap.top());
+        res.push(key[0]);
+        heap.removeTop();
     }
     return res;
 }
