@@ -134,7 +134,6 @@ var nthUglyNumber = function(n){
         heap.insert(ans * 5);
         ans = heap.top();
         heap.removeTop();
-        // reduce repeat
         while (heap.getSize() && ans === heap.top()){
             heap.removeTop();
         }

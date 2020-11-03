@@ -10,8 +10,26 @@
  * @return {boolean}
  */
 var isUgly = function(num) {
-    return mysolution2(num);
+    return solution2(num);
 };
+
+var solution1 = function(n){
+    if (n <= 0) return false;
+
+    while (n % 2 === 0) n /= 2;
+    while (n % 3 === 0) n /= 3;
+    while (n % 5 === 0) n /= 5;
+    return n === 1;
+}
+
+var solution2 = function(n){
+    for (let p of [2, 3, 5]){
+        while (n && n % p === 0){
+            n /= p;
+        }
+    }
+    return n === 1;
+}
 
 var mysolution1 = function(num){
     if (num <= 0) return false;

@@ -13,14 +13,18 @@
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
 var merge = function(nums1, m, nums2, n) {
-    let p1 = m - 1, p2 = n - 1; p = nums1.length - 1;
-    while (p2 >= 0){ //直到p2小于0，即遍历完nums2
-        if(p1 >= 0 && nums1[p1] > nums2[p2]){
+    mysolution1(nums1, m, nums2, n);
+};
+
+var mysolution1 = function(nums1, m, nums2, n){
+    let p1 = m - 1, p2 = n - 1, p = nums1.length - 1;
+    while (p2 >= 0){
+        if (p1 >= 0 && nums1[p1] > nums2[p2]){
             nums1[p--] = nums1[p1--];
-        } else {
+        }else{
             nums1[p--] = nums2[p2--];
         }
     }
-};
+}
 // @lc code=end
 

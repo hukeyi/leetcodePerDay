@@ -20,18 +20,18 @@ const { RSA_NO_PADDING } = require("constants");
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    return mysolution1(root);
+    return solution1(root);
 };
 
-var mysolution1 = function(root){
+var solution1 = function(root){
     let res = [], queue = [];
     if (!root) return res;
 
     queue.push(root);
     while (queue.length){
         let ans = [];
-        let len = queue.length;
-        while (len--){
+        let num = queue.length;
+        while(num--){
             let curr = queue.shift();
             ans.push(curr.val);
             queue = queue.concat(curr.children);
