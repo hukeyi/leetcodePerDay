@@ -17,8 +17,7 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-// 递归
-var inorderTraversal = function (root){
+var inorderTraversal1 = function (root){
     if (!root) return [];
 
     let res = [];
@@ -33,20 +32,20 @@ var inorderTraversal = function (root){
 }
 
 // 迭代
-var inorderTraversal = function (root) {
+var inorderTraversal = function (root){
     let res = [];
     if (!root) return res;
 
-    let stack = [], r = root;
-    while (r || stack.length){
-        while (r){
-            stack.push(r);
-            r = r.left;
+    let stack = [];
+    while (root || stack.length){
+        while (root){
+            stack.push(root);
+            root = root.left;
         }
         if (stack.length){
-            r = stack.pop();
-            res.push(r.val);
-            r = r.right;
+            root = stack.pop();
+            res.push(root.val);
+            root = root.right;
         }
     }
     return res;

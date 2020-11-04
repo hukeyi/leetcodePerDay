@@ -10,10 +10,10 @@
  * @return {number}
  */
 var maxArea = function(height) {
-    return solution2(height);
+    return mysolution2(height);
 };
 
-var solution1 = function (height){
+var mysolution1 = function (height){
     const len = height.length;
     let max = 0;
     for (let i = 0; i < len - 1; i++){
@@ -25,9 +25,10 @@ var solution1 = function (height){
     return max;
 }
 
-var solution2 = function(height){
+var mysolution2 = function (height){
     const len = height.length;
-    let max = 0, i = 0, j = len - 1;
+    let max = 0;
+    let i = 0, j =  len - 1;
     while (i < j){
         let minHeight = height[i] < height[j] ? height[i++] : height[j--];
         let area = (j - i + 1) * minHeight;

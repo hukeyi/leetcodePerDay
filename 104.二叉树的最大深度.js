@@ -17,28 +17,28 @@
  * @return {number}
  */
 // 递归
-// var maxDepth = function (root) {
-//     if (!root) return 0;
-//     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
-// }
+var maxDepth = function (root){
+    if (!root) return 0;
+    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+}
 
-// 迭代：BFS 队列
-var maxDepth = function(root){
+// 迭代
+var maxDepth = function (root){
     if (!root) return 0;
 
     let queue = [];
+    let ans = 0;
     queue.push(root);
-    let res = 0;
     while (queue.length){
-        let size = queue.length;
-        while (size--){ //一整层
+        let num = queue.length;
+        while (num--){
             let curr = queue.shift();
             if (curr.left) queue.push(curr.left);
             if (curr.right) queue.push(curr.right);
         }
-        res++;
+        ans++;
     }
-    return res;
+    return ans;
 }
 // @lc code=end
 

@@ -12,28 +12,30 @@
  */
 
 var rotate = function (nums, k){
-    solution2(nums, k);
+    mysolution2(nums, k);
 }
 
-var solution1 = function(nums, k){
+var mysolution1 = function(nums, k){
     while (k--){
         nums.unshift(nums.pop());
     }
 }
 
-var reverse1 = function(nums, start, end){
+var reverse = function (nums, start, end){
     while (start < end){
         [nums[start], nums[end]] = [nums[end], nums[start]];
         start++;
         end--;
     }
 }
-var solution2 = function(nums, k){
+
+var mysolution2 = function (nums, k){
     const len = nums.length;
     k %= len;
-    reverse1(nums, 0, len - 1);
-    reverse1(nums, 0, k - 1);
-    reverse1(nums, k, len - 1);
+
+    reverse(nums, 0, len - 1);
+    reverse(nums, 0, k - 1);
+    reverse(nums, k, len - 1);
 }
 
 // 环状替代

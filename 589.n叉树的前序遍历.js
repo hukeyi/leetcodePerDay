@@ -18,14 +18,13 @@
  * @return {number[]}
  */
 var preorder = function(root) {
-    return mysolution2(root);
+    return solution2(root);
 };
 
-// 递归
-var mysolution1 = function(root){
-    let res = [];
-    if (!root) return res;
+var solution1 = function (root){
+    if (!root) return [];
 
+    let res = [];
     const pre = (root) => {
         if (!root) return;
         res.push(root.val);
@@ -37,19 +36,17 @@ var mysolution1 = function(root){
     return res;
 }
 
-// BFS
-var mysolution2 = function(root){
-    let res = [];
-    if (!root) return res;
+var solution2 = function (root){
+    if (!root) return [];
 
-    let stack = [];
+    let res = [], stack = [];
     stack.push(root);
     while (stack.length){
         let curr = stack.pop();
         res.push(curr.val);
-        let len = curr.children.length;
-        while (len--){
-            stack.push(curr.children[len]);
+        let num = curr.children.length;
+        while (num--){
+            stack.push(curr.children[num]);
         }
     }
     return res;
