@@ -20,12 +20,11 @@ var MinStack = function() {
 MinStack.prototype.push = function(x) {
     this.theStack.push(x);
 
-    const len = this.minStack.length;
-    const minVal = this.minStack[len - 1];
-    if (!this.minStack.length || minVal > x){
+    const minval = this.getMin();
+    if (!this.minStack.length || x < minval){
         this.minStack.push(x);
     }else{
-        this.minStack.push(minVal);
+        this.minStack.push(minval);
     }
 };
 

@@ -11,16 +11,16 @@
  * @return {number[]}
  */
 var maxSlidingWindow = function(nums, k) {
-    return mysolution2(nums, k);
+    return solution2(nums, k);
 };
 
-// 暴力解法 超时
-var mysolution1 = function(nums, k) {
-    const len = nums.length - k + 1;
+// 暴力
+var mysolution1 = function (nums, k){
+    const len = nums.length;
     let res = [];
-    for (let i = 0; i < len; i++){
-        const temp = nums.slice(i, i + k);
-        res.push(Math.max(...temp));
+    for (let i = 0; i < len - k + 1; i++){
+        let window = nums.slice(i, i + k);
+        res.push(Math.max(...window))
     }
     return res;
 }
@@ -29,6 +29,7 @@ var mysolution1 = function(nums, k) {
 // 窗口左边界和右边界各用一个变量
 var mysolution2 = function(nums, k){
     const len = nums.length;
+    // if (len <= k) return [Math.max(...nums)];
     if(len < 2) return nums;
 
     let deque = [], res = [];

@@ -124,16 +124,16 @@ class minHeap{
 }
 
 var topKFrequent = function(nums, k) {
-    return solution1(nums, k);
+    return solution2(nums, k);
 };
 
-var solution1 = function(nums, k){
+var solution2 = function (nums, k){
     const len = nums.length;
     let hash = {};
     for (let i = 0; i < len; i++){
         hash[nums[i]] = nums[i] in hash ? hash[nums[i]] + 1 : 1;
     }
-    
+
     let heap = new minHeap();
     for (let key in hash){
         let obj = new Object();
@@ -142,37 +142,7 @@ var solution1 = function(nums, k){
         if (heap.getSize() < k){
             heap.insert(obj);
         }else{
-            if (obj[key] > heap.topValue()){
-                heap.removeTop();
-                heap.insert(obj);
-            }
-        }
-    }
-    let res = [];
-    while (k--){
-        let key = Object.keys(heap.top());
-        res.push(key[0]);
-        heap.removeTop();
-    }
-    return res;
-}
-
-var mysolution1 = function(nums, k){
-    const len = nums.length;
-    let hash = {};
-    for (let i = 0; i < len; i++){
-        hash[nums[i]] = nums[i] in hash ? hash[nums[i]] + 1 : 1;
-    }
-    
-    let heap = new minHeap();
-    for (let key in hash){
-        let obj = new Object();
-        obj[key] = hash[key];
-
-        if (heap.getSize() < k){
-            heap.insert(obj);
-        }else{
-            if (obj[key] > heap.topValue()){
+            if (hash[key] > heap.topValue()){
                 heap.removeTop();
                 heap.insert(obj);
             }

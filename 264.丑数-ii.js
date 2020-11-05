@@ -125,20 +125,22 @@ class minHeap{
     }
 }
 
-var nthUglyNumber = function(n){
+var nthUglyNumber = function (n){
     let heap = new minHeap();
     let ans = 1;
     while (--n){
         heap.insert(ans * 2);
         heap.insert(ans * 3);
         heap.insert(ans * 5);
-        ans = heap.top();
+
+        ans = heap.top(); //current layer's ugly number
         heap.removeTop();
-        while (heap.getSize() && ans === heap.top()){
+        // reduce repeat numbers
+        while (heap.getSize() && heap.top() === ans){
             heap.removeTop();
         }
     }
-    return ans;
+    return ans
 }
 // @lc code=end
 

@@ -11,19 +11,20 @@
  */
 var generateParenthesis = function(n) {
     let res = [];
-    solution2(0, 0, n, "", res);
+    solution1(0, 0, n, "", res);
     return res;
 };
 
-var solution2 = function(left, right, max, ans, res){
-    if (left === max && right == max){
+var solution1 = function (left, right, max, ans, res){
+    // end
+    if (left === max && right === max){
         res.push(ans);
-        return;
+        return res;
     }
-
-    // current process
-    if (left < max) solution2(left + 1, right, max, ans + "(", res);
-    if (right < left) solution2(left, right + 1, max, ans + ")", res);
+    // current
+    if (left < max) solution1(left + 1, right, max, ans + "(", res);
+    if (left > right) solution1(left, right + 1, max, ans + ")", res);
+    // drill down
 }
 // @lc code=end
 
