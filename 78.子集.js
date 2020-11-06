@@ -10,43 +10,43 @@
  * @return {number[][]}
  */
 var subsets = function(nums) {
-    return solution2(nums);
+    return mysolution2(nums);
 };
 
-var solution2 = function(nums){
+var mysolution1 = function(nums){
     let res = [[]];
 
     for (let num of nums){
         const len = res.length;
-        for(let i = 0; i < len; i++){
-            let newset = res[i].concat([num]);
-            res.push(newset);
+        for (let i = 0; i < len; i++){
+            let newSet = res[i].concat([num]);
+            res.push(newSet);
         }
     }
     return res;
 }
 
 // 回溯
-var solution1 = function (nums){
-    let res = [], list = [];
-    dfs(nums, list, res, 0);
+var mysolution2 = function(nums){
+    let res = [], ans = [];
+    dfs(nums, 0, ans, res);
     return res;
 }
 
-var dfs = function(nums, list, res, index){
+var dfs = function(nums, index, ans, res){
+    // terminator
     if (index === nums.length){
-        res.push(list.slice());
+        res.push(ans.slice()); //注意是ans的拷贝，不能直接pushans
         return;
     }
-
-    // current logic
-    dfs(nums, list, res, index + 1);
+    // current logic: +index : no index
+    // drill down
+    dfs(nums, index + 1, ans, res);
+    ans.push(nums[index]);
+    dfs(nums, index + 1, ans, res);
     
-    list.push(nums[index]);
-    dfs(nums, list, res, index + 1);
-
-    // restore
-    list.pop();
+    // restate
+    ans.pop();
 }
 // @lc code=end
 

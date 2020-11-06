@@ -18,7 +18,7 @@
  * @return {ListNode}
  */
 // 递归
-// var swapPairs = function (head) {
+// var swapPairs = function(head){
 //     if (!head || !head.next) return head;
 
 //     let node1 = head, node2 = head.next, node3 = node2.next;
@@ -27,11 +27,11 @@
 //     return node2;
 // }
 
-//迭代
-var swapPairs = function (head){
+// 迭代
+var swapPairs = function(head){
     if (!head || !head.next) return head;
 
-    const dummy = new ListNode;
+    let dummy = new ListNode();
     dummy.next = head;
     let curr = dummy;
     while (curr.next && curr.next.next){

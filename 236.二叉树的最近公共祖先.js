@@ -19,10 +19,8 @@
  * @return {TreeNode}
  */
 var lowestCommonAncestor = function(root, p, q) {
-    // root不存在或 root就是p或 root就是q 则结果就是root
-    if (!root || root === p || root === q){
-        return root;
-    }
+    if (!root || root === p || root === q) return root;
+
     let left = lowestCommonAncestor(root.left, p, q);
     let right = lowestCommonAncestor(root.right, p, q);
     if (!left) return right;

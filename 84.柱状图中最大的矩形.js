@@ -11,48 +11,44 @@
  */
 var largestRectangleArea = function(heights) {
     // return solution1(heights);
-    return solution2(heights);
+    return mysolution2(heights);
 };
 
-// 暴力解法
-// 固定一个柱子，从柱子开始向左右散开，直到碰到比柱子矮的就停止
-var solution1 = function(heights){
+// 暴力 956ms
+var mysolution1 = function(heights){
     const len = heights.length;
     let max = 0;
     for (let i = 0; i < len; i++){
-        let curr = heights[i];
         let left = i - 1, right = i + 1;
-        while (left >= 0 && heights[left] >= curr){
+        while (left >= 0 && heights[left] >= heights[i]){
             left--;
         }
-        while (right <= len - 1 && heights[right] >= curr){
+        while (right <= len - 1 && heights[right] >= heights[i]){
             right++;
         }
-        max = Math.max(max, (right - left - 1) * curr);
+        let width = right - left - 1;
+        max = Math.max(max, width * heights[i]);
     }
     return max;
 }
 
-// 单调栈，单调递增
+var peek = function(stack){
+    const len = stack.length;
+    return stack[len - 1];
+}
+
+// 单调栈，从上到下 递增
 var mysolution2 = function(heights){
-    let max = 0;
-    let stack = [];
-    heights.unshift(0); //避免溢出，处理heights[0]的左边界
-    heights.push(0); //处理heights[len-1]的右边界
+    let max = 0, stack = [];
+    heights.unshift(0); heights.push(0);
     const len = heights.length;
     for (let i = 0; i < len; i++){
-        // 当栈顶元素比新元素大，则说明栈顶元素的左右边界可以确定了，则它的最大面积也可以确定了
-        while (stack.length !== 0 && heights[stack[stack.length-1]] > heights[i]){
-            // 栈顶元素弹出，计算其最大面积
-            let curr = stack.pop();
-            // 左边界是栈顶元素的下一个元素(假设为k）的后一位
-            // （因为k是左边第一个比curr小的，最后一个比curr大的下标要加一）
-            let left = stack[stack.length - 1] + 1;
-            // 右边界就是新元素（假设下标是j）的前一位
-            // （因为j是右边第一个比curr小的，所以得到最后一个比curr大的下标要减一）
-            let right = i - 1;
-            let imax = (right - left + 1) * heights[curr];
-            max = Math.max(max, imax);
+        while (stack.length && heights[peek(stack)] > heights[i]){
+            let curr = stack.pop(); // min height
+            let left = peek(stack) + 1; //left bound
+            let right = i - 1; // right bound;
+            let width = right - left + 1;
+            max = Math.max(max, width * heights[curr]);
         }
         stack.push(i);
     }

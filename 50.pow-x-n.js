@@ -15,29 +15,25 @@ var myPow = function(x, n) {
         x = 1 / x;
         n *= (-1);
     }
-    return solution2(x, n);
+    return mysolution2(x, n);
 };
 
-// 暴力 超时
-var solution1 = function(x, n){
-    if (n === 0) return 1;
-    if (n < 0) {
-        n *= (-1);
-        x = 1 / x;
+// 暴力
+var mysolution1 = function(x, n){
+    let res = 1;
+    while (n--){
+        res *= x;
     }
-
-    let factor = x;
-    while (--n){
-        x *= factor;
-    }
-    return x;
+    return res;
 }
 
 // 递归
-var solution2 = function(x, n){
+var mysolution2 = function(x, n){
+    // terminator
     if (n === 0) return 1;
-    
-    let factor = solution2(x, Math.floor(n / 2));
-    return n % 2 === 0 ? factor * factor : factor * factor * x;
+
+    // current logic
+    let factor = mysolution2(x, Math.floor(n / 2));
+    return (n % 2 === 0) ? factor * factor : factor * factor * x;
 }
 // @lc code=end
