@@ -36,31 +36,6 @@ var mysolution1 = function(nums){
     return res;
 }
 
-var mysolution2 = function(nums){
-    nums.sort((a, b) => { return a - b; });
-    const len = nums.length;
-    let res = [];
-    for (let k = 0; k < len - 2; k++){
-        if (nums[k] > 0) break;
-        if (k > 0 && nums[k] === nums[k - 1]) continue;
-
-        let i = k + 1, j = len - 1, sum = 0;
-        while (i < j){
-            sum = nums[k] + nums[i] + nums[j];
-            if (sum < 0){
-                i++;
-            }else if (sum > 0){
-                j--;
-            }else{
-                res.push([nums[k], nums[i], nums[j]]);
-                while (i < j && nums[i] === nums[++i]);
-                while (i < j && nums[j] === nums[--j]);
-            }
-        }
-    }
-    return res;
-}
-
 var mysolution3 = function (nums){
     nums.sort((a, b) => { return a - b; });
     const len = nums.length;
