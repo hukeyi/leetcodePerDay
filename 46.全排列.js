@@ -10,22 +10,19 @@
  * @return {number[][]}
  */
 var permute = function(nums) {
-    let res = [];
-    let ans = [];
-    for (let num of nums){
-        ans.push(num);
-    }
-    const backtrack = function (n, ans, res, first){
-        if (first === n){
-            res.push(ans.slice());
-        }
-        for (let i = first; i < n; i++){
-            [ans[first], ans[i]] = [ans[i], ans[first]];
-            backtrack(n, ans, res, first + 1);
-            [ans[first], ans[i]] = [ans[i], ans[first]];
-        }
-    }
+    let res = [], ans = nums.slice();
 
+    const backtrack = function(len, ans, res, first){
+        if (first === len){
+            res.push(ans.slice());
+            return;
+        }
+        for (let i = first; i < len; i++){
+            [ans[first], ans[i]] = [ans[i], ans[first]];
+            backtrack(len, ans, res, first + 1);
+            [ans[first], ans[i]] = [ans[i], ans[first]];
+        }
+    }
     const len = nums.length;
     backtrack(len, ans, res, 0);
     return res;

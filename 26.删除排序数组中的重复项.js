@@ -10,21 +10,10 @@
  * @return {number}
  */
 var removeDuplicates = function(nums) {
-    return solution1(nums);
+    return mysolution1(nums);
 };
 
-var solution1 = function (nums){
-    const len = nums.length;
-    let j = 1;
-    for (let i = 1; i < len; i++){
-        if (nums[i] !== nums[i - 1]){
-            nums[j++] = nums[i];
-        }
-    }
-    return j;
-}
-
-var solution2 = function (nums){
+var mysolution1 = function(nums){
     const len = nums.length;
     let j = 0;
     for (let i = 0; i < len; i++){

@@ -10,7 +10,7 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    return mysolution1(s);
+    return solution1(s);
 };
 
 var peek = function(stack){
@@ -18,16 +18,16 @@ var peek = function(stack){
     return stack[len - 1];
 }
 
-var mysolution1 = function(s){
+var solution1 = function (s){
     const len = s.length;
     if (len % 2 !== 0) return false;
 
-    let match = {')': '(', ']': '[', '}': '{'}, stack = [];
-    let left = Object.values(match);
+    let match = {')': '(', ']': '[', '}': '{'};
+    let left = Object.values(match), stack = [];
     for (let i = 0; i < len; i++){
-        if (left.includes(s[i])){ // 左括号直接进栈
+        if (left.includes(s[i])){
             stack.push(s[i]);
-        }else{ //右括号与栈顶比较
+        }else{
             if (match[s[i]] !== peek(stack)){
                 return false;
             }

@@ -10,12 +10,10 @@
  * @return {number}
  */
 var largestRectangleArea = function(heights) {
-    // return solution1(heights);
-    return mysolution2(heights);
+    return solution2(heights);
 };
 
-// 暴力 956ms
-var mysolution1 = function(heights){
+var solution1 = function(heights){
     const len = heights.length;
     let max = 0;
     for (let i = 0; i < len; i++){
@@ -37,16 +35,15 @@ var peek = function(stack){
     return stack[len - 1];
 }
 
-// 单调栈，从上到下 递增
-var mysolution2 = function(heights){
-    let max = 0, stack = [];
+var solution2 = function(heights){
+    let stack = [], max = 0;
     heights.unshift(0); heights.push(0);
     const len = heights.length;
     for (let i = 0; i < len; i++){
         while (stack.length && heights[peek(stack)] > heights[i]){
-            let curr = stack.pop(); // min height
-            let left = peek(stack) + 1; //left bound
-            let right = i - 1; // right bound;
+            let curr = stack.pop(); // min height;
+            let left = peek(stack) + 1; // left bound
+            let right = i - 1;
             let width = right - left + 1;
             max = Math.max(max, width * heights[curr]);
         }
