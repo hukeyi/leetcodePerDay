@@ -9,23 +9,23 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var permute = function(nums) {
+var permute = function(nums){
     let res = [], ans = nums.slice();
+    const len = nums.length;
 
-    const backtrack = function(len, ans, res, first){
+    const backtrack = function(len, first, ans, res){
         if (first === len){
             res.push(ans.slice());
-            return;
+            return res;
         }
         for (let i = first; i < len; i++){
-            [ans[first], ans[i]] = [ans[i], ans[first]];
-            backtrack(len, ans, res, first + 1);
-            [ans[first], ans[i]] = [ans[i], ans[first]];
+            [ans[i], ans[first]] = [ans[first], ans[i]];
+            backtrack(len, first + 1, ans, res);
+            [ans[i], ans[first]] = [ans[first], ans[i]];
         }
     }
-    const len = nums.length;
-    backtrack(len, ans, res, 0);
+    backtrack(len, 0, ans, res);
     return res;
-};
+}
 // @lc code=end
 

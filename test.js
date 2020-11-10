@@ -1,16 +1,56 @@
-var solution2 = function(nums){
-    let res = [[]];
+// const obj = {};
+// // const obj可以添加属性
+// obj.name = "zhangsan";
+// obj.address = {city: "guangzhou"};
+// console.log(obj); //{ name: 'zhangsan', address: { city: 'guangzhou' } }
+// // 也可以改变属性值
+// obj.name = "zhangsi";
+// console.log(obj); //{ name: 'zhangsi', address: { city: 'guangzhou' } }
 
-    for (let num of nums){ // 每一轮，都把num加到当前所拥有的子集中去，然后作为新子集加到res
-        const len = res.length;
-        for (let i = 0; i < len; i++){
-            let newSubset = res[i].concat([num]);
-            res.push(newSubset);
-        }
-    }
-    return res;
-}
+// Object.freeze(obj);
+// // freeze obj之后不能改变值属性
+// obj.name = "lisi";
+// // 但是能改变对象属性，同时也可以给类型为对象的属性添加新属性
+// obj.address.city = "shanghai";
+// obj.address.street = "nanjing east road";
+// console.log(obj);
+// /*{
+//   name: 'zhangsi',
+//   address: { city: 'shanghai', street: 'nanjing east road' }
+// }*/
 
-let test = [1,2,3];
-let res = solution2(test);
-console.log(res);
+// // freeze obj之后不能添加属性
+// obj.age = "18";
+// console.log(obj);
+// // {
+// //     name: 'zhangsi',
+// //     address: { city: 'shanghai', street: 'nanjing east road' }
+// //   }
+
+// // 如果要将对象中的所有属性也冻结：
+// function freezeAll(obj){
+//     Object.freeze(obj);
+//     Object.keys(obj).forEach(key => {
+//         if (typeof obj[key] === "object"){
+//             freezeAll(obj[key]);
+//         }
+//     })
+// }
+
+// freezeAll(obj);
+// obj.address.city = "beijing";
+// console.log(obj);
+// // {
+// //     name: 'zhangsi',
+// //     address: { city: 'shanghai', street: 'nanjing east road' }
+// // }
+
+// bar();
+// var bar = function(){
+//     console.log(2);
+// }
+
+// console.log(a); //ReferenceError: Cannot access 'a' before initialization
+let a = 1;
+var a = 2;
+console.log(a);
