@@ -11,21 +11,25 @@
  * @return {number}
  */
 
- // 递归 超时 自顶向下
 var climbStairs = function(n) {
-   // if (n <= 0) return 0;
-   // if (n <= 2) return n;
-   // return climbStairs(n - 1) + climbStairs(n - 2);
-   return mysolution3(n);
+   return solution4(n);
 }
 
-var mysolution1 = function(n){
+// 递归
+var solution1 = function(n){
+   if (n <= 0) return 0;
+   if (n <= 2) return n;
+   return solution1(n - 1) + solution1(n - 2);
+}
+
+// 迭代
+var solution3 = function(n){
    if (n <= 0) return 0;
    if (n <= 2) return n;
 
    let step1 = step2 = 1;
    let all_way = 2;
-   for (let i = 3; i <= n; i++){
+   for(let i = 3; i <= n; i++){
       step1 = step2;
       step2 = all_way;
       all_way = step1 + step2;
@@ -33,7 +37,7 @@ var mysolution1 = function(n){
    return all_way;
 }
 
-var mysolution2 = function(n){
+var solution2 = function(n){
    if (n <= 0) return 0;
    if (n <= 2) return n;
 
@@ -45,8 +49,8 @@ var mysolution2 = function(n){
    }
    return a;
 }
-// 自底向上
-var mysolution3 = function (n){
+
+var solution4 = function(n){
    let dp = [];
    dp[0] = dp[1] = 1;
    for (let i = 2; i <= n; i++){

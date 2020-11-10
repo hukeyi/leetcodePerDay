@@ -20,10 +20,25 @@ var letterCombinations = function(digits) {
     map.set(8, 'tuv');
     map.set(9, 'wxyz');
 
-    let res = [];
-    solution1(digits, 0, map, "", res);
+    const res = [];
+    mysolution1(map, digits, 0, "", res);
     return res;
 };
+
+var mysolution1 = function(map, digits, index, ans, res){
+    // terminator: index === digits.length
+    if (index === digits.length){
+        if (ans) res.push(ans);
+        return;
+    }
+    // current logic and drill down
+    let currDigit = Number(digits[index]);
+    const str = map.get(currDigit);
+    const len = str.length;
+    for (let i = 0; i < len; i++){
+        mysolution1(map, digits, index + 1, ans + str[i], res);
+    }
+}
 
 var solution1 = function(digits, index, map, ans, res){
     // terminator
