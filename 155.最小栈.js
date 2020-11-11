@@ -21,10 +21,10 @@ MinStack.prototype.push = function(x) {
     this.theStack.push(x);
 
     const len = this.minStack.length;
-    if (!this.minStack.length || this.minStack[len - 1] > x){
+    if (!len || this.getMin() > x){
         this.minStack.push(x);
     }else{
-        this.minStack.push(this.minStack[len - 1]);
+        this.minStack.push(this.getMin());
     }
 };
 

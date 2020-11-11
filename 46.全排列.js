@@ -10,21 +10,23 @@
  * @return {number[][]}
  */
 var permute = function(nums){
-    let res = [], ans = nums.slice();
-    const len = nums.length;
+    return mysolution1(nums);
+}
 
-    const backtrack = function(len, first, ans, res){
-        if (first === len){
+var mysolution1 = function (nums){
+    const len = nums.length, res = [], ans = nums.slice();
+    const backtrack = function(nums, index, ans, res){
+        if (nums.length === index){
             res.push(ans.slice());
-            return res;
+            return;
         }
-        for (let i = first; i < len; i++){
-            [ans[i], ans[first]] = [ans[first], ans[i]];
-            backtrack(len, first + 1, ans, res);
-            [ans[i], ans[first]] = [ans[first], ans[i]];
+        for (let i = index; i < len; i++){
+            [ans[index], ans[i]] = [ans[i], ans[index]];
+            backtrack(nums, index + 1, ans, res);
+            [ans[index], ans[i]] = [ans[i], ans[index]];
         }
     }
-    backtrack(len, 0, ans, res);
+    backtrack(nums, 0, ans, res);
     return res;
 }
 // @lc code=end
