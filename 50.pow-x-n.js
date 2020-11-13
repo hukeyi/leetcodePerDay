@@ -12,13 +12,13 @@
  */
 var myPow = function(x, n) {
     if (n < 0){
-        x = 1 / x;
         n *= (-1);
+        x = 1 / x;
     }
-    return solution2(x, n);
+    return mysolution2(x, n);
 };
 
-var solution1 = function(x, n){
+var mysolution1 = function(x, n){
     let res = 1;
     while (n--){
         res *= x;
@@ -26,11 +26,12 @@ var solution1 = function(x, n){
     return res;
 }
 
-var solution2 = function(x, n){
+var mysolution2 = function(x, n){
     if (n === 0) return 1;
 
     // current logic
-    let factor = solution2(x, Math.floor(n / 2));
-    return (n % 2 === 0) ? factor * factor : factor * factor * x;
+    // drill down
+    let factor = mysolution2(x, Math.floor(n / 2));
+    return (n % 2 === 0) ? factor * factor :  factor * factor * x;
 }
 // @lc code=end

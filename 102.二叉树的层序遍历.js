@@ -17,16 +17,18 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    return solution2(root);
+    return mysolution2(root);
 };
+
 // bfs
-var solution1 = function(root){
+var mysolution1 = function(root){
     if (!root) return [];
 
     const queue = [], res = [];
     queue.push(root);
     while (queue.length){
-        let num = queue.length, ans = [];
+        let num = queue.length;
+        const ans = [];
         while (num--){
             let curr = queue.shift();
             ans.push(curr.val);
@@ -38,22 +40,22 @@ var solution1 = function(root){
     return res;
 }
 
-// dfs
-var solution2 = function(root){
+// dfs recursive
+var mysolution2 = function(root){
     const res = [];
     let level = 0;
-    const dfs = function(root, level, res){
+    const recur = function (root, level, res){
         // terminator
         if (!root) return;
 
-        // current
+        // current logic
         if (res[level] === undefined) res[level] = [];
         res[level].push(root.val);
         // drill down
-        if (root.left) dfs(root.left, level + 1, res);
-        if (root.right) dfs(root.right, level + 1, res);
+        if (root.left) recur(root.left, level + 1, res);
+        if (root.right) recur(root.right, level + 1, res);
     }
-    dfs(root, 0, res);
+    recur(root, 0, res);
     return res;
 }
 // @lc code=end

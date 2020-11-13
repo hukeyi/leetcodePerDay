@@ -21,18 +21,20 @@ var mysolution1 = function(start, end, bank){
 
     const queue = [[start, 0]], dna = ['A', 'C', 'G', 'T'];
     while (queue.length){
-        let [curr, count] = queue.shift();
-        if (curr === end) return count;
-
+        let [gene, count] = queue.shift();
+        // check if gene equals to the end. if true, return 
+        if (gene === end)   return count;
+        
+        // replace every character and check
         for (let i = 0; i < 8; i++){
             for (let j = 0; j < 4; j++){
-                if (curr[i] === dna[j]) continue;
+                // replace the string
+                let temp = gene.slice(0, i) + dna[j] + gene.slice(i + 1);
+                // do not in the bank
+                if (!bankset.has(temp)) continue;
 
-                let temp = curr.slice(0, i) + dna[j] + curr.slice(i + 1);
-                if (bankset.has(temp)){
-                    queue.push([temp, count + 1]);
-                    bankset.delete(temp);
-                }
+                queue.push([temp, count + 1]);
+                bankset.delete(temp);
             }
         }
     }

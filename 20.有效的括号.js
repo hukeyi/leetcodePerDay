@@ -10,25 +10,38 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    return solution1(s);
+    return mysolution2(s);
 };
 
-var peek = function(stack){
+var mysolution2 = function(s){
+    const len = s.length;
+    if (len % 2 === 1) return false;
+    const stack = [];
+    for (let ch of s){
+        if (ch === '(') stack.push(')');
+        else if (ch === '[') stack.push(']');
+        else if (ch === '{') stack.push('}');
+        else if (!stack.length || stack.pop() !== ch) return false;
+    }
+    return stack.length === 0;
+}
+
+var top = function(stack){
     const len = stack.length;
     return stack[len - 1];
 }
 
-var solution1 = function (s){
+var mysolution1 = function(s){
     const len = s.length;
     if (len % 2 !== 0) return false;
 
-    let match = {')': '(', ']': '[', '}': '{'};
-    let left = Object.values(match), stack = [];
-    for (let i = 0; i < len; i++){
-        if (left.includes(s[i])){
-            stack.push(s[i]);
+    const match = {')': '(', ']': '[', '}': '{'}, stack = [];
+    const left = Object.values(match);
+    for (let ch of s){
+        if (left.includes(ch)){
+            stack.push(ch);
         }else{
-            if (match[s[i]] !== peek(stack)){
+            if (top(stack) !== match[ch]){
                 return false;
             }
             stack.pop();

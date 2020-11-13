@@ -10,36 +10,39 @@
  * @return {number[][]}
  */
 var subsets = function(nums) {
-    return solution2(nums);
+    return mysolution2(nums);
 };
 
-var solution1 = function(nums){
-    let res = [[]];
-
+var mysolution1 = function(nums){
+    const res = [[]];
     for (let num of nums){
-        const len = res.length;
+        let len = res.length;
         for (let i = 0; i < len; i++){
-            let newSet = res[i].concat([num]);
-            res.push(newSet);
+            let newset = res[i].slice();
+            newset.push(num);
+            res.push(newset);
         }
     }
     return res;
 }
 
-var solution2 = function(nums){
+// dfs
+var mysolution2 = function(nums){
     const res = [], ans = [];
-    const dfs = function (nums, index, ans, res){
+    const dfs = function(nums, ans, res, index){
         if (index === nums.length){
             res.push(ans.slice());
-            return;
+            return ;
         }
-        dfs(nums, index + 1, ans, res);
-        ans.push(nums[index]);
-        dfs(nums, index + 1, ans, res);
 
+        // current logic and drill down
+        dfs(nums, ans, res, index + 1);
+        ans.push(nums[index]);
+        dfs(nums, ans, res, index + 1);
+        // restate
         ans.pop();
     }
-    dfs(nums, 0, ans, res);
+    dfs(nums, ans, res, 0);
     return res;
 }
 // @lc code=end
