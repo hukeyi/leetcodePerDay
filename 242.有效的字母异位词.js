@@ -11,28 +11,25 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    return mysolution2(s, t);
+    return solution2(s, t);
 };
 
-var mysolution1 = function(s, t){
+var solution1 = function(s, t){
     if (s.length !== t.length) return false;
 
-    return s.split("").sort().join("") === t.split("").sort().join("");
+    return s.split('').sort().join('') === t.split('').sort().join('');
 }
 
-var mysolution2 = function(s, t){
+var solution2 = function(s, t){
     if (s.length !== t.length) return false;
 
-    let hash = {};
-    const len = s.length;
+    const hash = {}, len = s.length;
     for (let i = 0; i < len; i++){
         hash[s[i]] = s[i] in hash ? hash[s[i]] + 1 : 1;
-        hash[t[i]] = t[i] in hash ? hash[t[i]] - 1: -1;
+        hash[t[i]] = t[i] in hash ? hash[t[i]] - 1 : -1;
     }
     for (let key in hash){
-        if (hash[key] !== 0){
-            return false;
-        }
+        if (hash[key] !== 0) return false;
     }
     return true;
 }

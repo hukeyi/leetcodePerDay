@@ -18,24 +18,23 @@
  * @return {number[]}
  */
 var largestValues = function(root) {
-    return mysolution1(root);
+    return solution1(root);
 };
 
-var mysolution1 = function(root){
+var solution1 = function(root){
     if (!root) return [];
 
     const queue = [], res = [];
     queue.push(root);
-    while(queue.length){
-        let num = queue.length;
-        let ans = queue[0].val;
-        while (num--){
+    while (queue.length){
+        let len = queue.length, max = queue[0].val;
+        while (len--){
             let curr = queue.shift();
-            ans = (curr.val > ans) ? curr.val : ans;
+            max = Math.max(curr.val, max);
             if (curr.left) queue.push(curr.left);
             if (curr.right) queue.push(curr.right);
         }
-        res.push(ans);
+        res.push(max);
     }
     return res;
 }
