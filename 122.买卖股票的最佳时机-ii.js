@@ -13,6 +13,7 @@ var maxProfit = function(prices) {
     return solution2(prices);
 };
 
+// 动态规划
 var solution1 = function(prices){
     const len = prices.length;
     let [res, dp0, dp1] = [0, 0, -prices[0]];
@@ -28,9 +29,9 @@ var solution1 = function(prices){
 var solution2 = function(prices){
     let profit = 0;
     const len = prices.length;
-    for (let i = 0; i < len; i++){
-        const tmp = prices[i] - prices[i - 1];
-        if (tmp > 0) profit += tmp;
+    for (let i = 1; i < len; i++){
+        if (prices[i] > prices[i - 1])
+            profit += prices[i] - prices[i - 1];
     }
     return profit;
 }
