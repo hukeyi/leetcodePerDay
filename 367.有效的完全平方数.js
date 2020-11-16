@@ -10,7 +10,7 @@
  * @return {boolean}
  */
 var isPerfectSquare = function(num) {
-    return solution2(num);
+    return mysolution2(num);
 };
 
 // 暴力：3012ms
@@ -20,6 +20,19 @@ var solution1 = function(num){
     for (let i = 1; i <= Math.ceil(num / 2); i++){
         if (num / i === i) return true;
     } 
+    return false;
+}
+
+var mysolution2 = function(num){
+    if (num < 2) return num;
+    let left = 2, right = Math.floor(num / 2), guessRes;
+    while (left <= right){
+        let mid = Math.floor((left + right) / 2);
+        guessRes = mid * mid;
+        if (guessRes === num) return true;
+        if (guessRes > num) right = mid - 1;
+        else left = mid + 1;
+    }
     return false;
 }
 

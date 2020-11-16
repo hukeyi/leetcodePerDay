@@ -10,19 +10,19 @@
  * @return {boolean}
  */
 var isUgly = function(num) {
-    return mysolution2(num);
+    return solution2(num);
 };
 
-var mysolution1 = function(num){
+var solution1 = function(num){
     if (num <= 0) return false;
 
-    while (num % 2 === 0) num /= 2;
-    while (num % 3 === 0) num /= 3;
-    while (num % 5 === 0) num /= 5;
+    while(num % 2 === 0) num /= 2;
+    while(num % 3 === 0) num /= 3;
+    while(num % 5 === 0) num /= 5;
     return num === 1;
 }
 
-var mysolution2 = function(num){
+var solution2 = function(num){
     for (let p of [2, 3, 5]){
         while (num && num % p === 0){
             num /= p;

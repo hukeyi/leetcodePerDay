@@ -10,38 +10,21 @@
  * @return {number[][]}
  */
 var permute = function(nums){
-    return solution1(nums);
+    return mysolution1(nums);
 }
 
-var solution1 = function(nums){
+var mysolution1 = function(nums){
     const res = [], ans = nums.slice();
     const backtrack = function(nums, index, ans, res){
         if (index === nums.length){
             res.push(ans.slice());
             return;
         }
-        // current logic and drill down
-        for (let i = index; i < nums.length; i++){
-            [ans[index], ans[i]] = [ans[i], ans[index]];
-            backtrack(nums, index + 1, ans, res);
-            [ans[index], ans[i]] = [ans[i], ans[index]];
-        }
-    }
-    backtrack(nums, 0, ans, res);
-    return res;
-}
 
-var mysolution1 = function (nums){
-    const len = nums.length, res = [], ans = nums.slice();
-    const backtrack = function(nums, index, ans, res){
-        if (nums.length === index){
-            res.push(ans.slice());
-            return;
-        }
-        for (let i = index; i < len; i++){
-            [ans[index], ans[i]] = [ans[i], ans[index]];
+        for (let i = index; i < nums.length; i++){
+            [ans[i], ans[index]] = [ans[index], ans[i]];
             backtrack(nums, index + 1, ans, res);
-            [ans[index], ans[i]] = [ans[i], ans[index]];
+            [ans[i], ans[index]] = [ans[index], ans[i]];
         }
     }
     backtrack(nums, 0, ans, res);
