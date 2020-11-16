@@ -10,7 +10,7 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    return solution2(nums);
+    return mysolution3(nums);
 };
 
 // hash
