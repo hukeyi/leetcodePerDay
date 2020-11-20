@@ -10,7 +10,7 @@
  * @return {boolean}
  */
 var isPerfectSquare = function(num) {
-    return mysolution2(num);
+    return solution2(num);
 };
 
 // 暴力：3012ms
@@ -23,33 +23,18 @@ var solution1 = function(num){
     return false;
 }
 
-var mysolution2 = function(num){
+var solution2 = function(num){
     if (num < 2) return num;
-    let left = 2, right = Math.floor(num / 2), guessRes;
+    let left = 2, right = Math.floor(num / 2), res;
     while (left <= right){
         let mid = Math.floor((left + right) / 2);
-        guessRes = mid * mid;
-        if (guessRes === num) return true;
-        if (guessRes > num) right = mid - 1;
-        else left = mid + 1;
+        let res = mid * mid;
+        if (res === num) return true;
+        if (res < num) left = mid + 1;
+        else right = mid - 1;
     }
     return false;
 }
-
-// 二分查找 fastest
-var solution2 = function(num){
-    if (num < 2) return true;
-    let left = 2, right = Math.floor(num / 2), guessRes;
-    while (left <= right){
-        x = Math.floor((left + right) / 2);
-        guessRes = x * x;
-        if (guessRes === num) return true;
-        if (guessRes > num) right = x - 1;
-        else left = x + 1;
-    }
-    return false;
-}
-
 // bald: 80ms
 // 牛顿
 var solution3 = function(num){

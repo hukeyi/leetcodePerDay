@@ -9,21 +9,20 @@
  * @param {number} n
  * @return {string[]}
  */
-var generateParenthesis = function(n) {
+var generateParenthesis = function (n) {
     let res = [];
-    mysolution1(0, 0, n, "", res);
+    solution1(0, 0, n, "", res);
     return res;
 };
 
-var mysolution1 = function(left, right, max, ans, res){
-    // terminator
-    if (left === max && right === max){
-        res.push(ans);
+var solution1 = function (left, right, max, ans, res) {
+    if (left === max && right === max) {
+        res.push(ans.slice());
         return;
     }
-    // current logic and drill down
-    if (left < max) mysolution1(left + 1, right, max, ans + '(', res);
-    if (right < left) mysolution1(left, right + 1, max, ans + ')', res);
+    // current logic
+    if (left < max) solution1(left + 1, right, max, ans + '(', res);
+    if (right < left) solution1(left, right + 1, max, ans + ')', res);
 }
 // @lc code=end
 

@@ -10,12 +10,13 @@
  * @return {number[][]}
  */
 var subsets = function(nums) {
-    return mysolution2(nums);
+    return solution2(nums);
 };
 
-var mysolution1 = function(nums){
+var solution1 = function(nums){
+    const len = nums.length;
     const res = [[]];
-    for (let num of nums){
+    for (const num of nums){
         let len = res.length;
         for (let i = 0; i < len; i++){
             let newset = res[i].slice();
@@ -26,20 +27,16 @@ var mysolution1 = function(nums){
     return res;
 }
 
-// dfs
-var mysolution2 = function(nums){
+var solution2 = function(nums){
     const res = [], ans = [];
-    const dfs = function(nums, ans, res, index){
+    const dfs = function (nums, ans, res, index){
         if (index === nums.length){
             res.push(ans.slice());
-            return ;
+            return;
         }
-
-        // current logic and drill down
         dfs(nums, ans, res, index + 1);
         ans.push(nums[index]);
         dfs(nums, ans, res, index + 1);
-        // restate
         ans.pop();
     }
     dfs(nums, ans, res, 0);

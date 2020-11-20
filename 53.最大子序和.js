@@ -10,11 +10,11 @@
  * @return {number}
  */
 var maxSubArray = function(nums) {
-    return solution1(nums);
+    return mysolution1(nums);
 };
 
-var solution1 = function(nums){
-    let ans = nums[0]; let sum = 0;
+var mysolution1 = function(nums){
+    let ans = nums[0], sum = 0;
     for (const num of nums){
         sum = (sum > 0) ? sum + num : num;
         ans = Math.max(ans, sum);
