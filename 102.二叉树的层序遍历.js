@@ -17,19 +17,18 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    return solution2(root);
+    return mysolution2(root);
 };
 
 // bfs
-var solution1 = function(root){
+var mysolution1 = function(root){
     if (!root) return [];
-
     const queue = [], res = [];
     queue.push(root);
     while (queue.length){
         let num = queue.length;
         const ans = [];
-        while (num--){
+        while(num--){
             let curr = queue.shift();
             ans.push(curr.val);
             if (curr.left) queue.push(curr.left);
@@ -39,23 +38,17 @@ var solution1 = function(root){
     }
     return res;
 }
-
-// dfs recursive
-var solution2 = function(root){
-    const res = [], ans = [];
-    const dfs = function(root, level, res){
-        if (!root){
-            return;
-        }
-
+// dfs
+var mysolution2 = function(root){
+    const res = [];
+    const dfs = function (root, level, res){
+        if (!root) return;
         // current logic
         if (res[level] === undefined) res[level] = [];
         res[level].push(root.val);
-
         // drill down
         if (root.left) dfs(root.left, level + 1, res);
         if (root.right) dfs(root.right, level + 1, res);
-        // restate: no need
     }
     dfs(root, 0, res);
     return res;

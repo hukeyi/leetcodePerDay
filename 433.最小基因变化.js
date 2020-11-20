@@ -15,6 +15,16 @@ var minMutation = function(start, end, bank) {
     return solution1(start, end, bank);
 };
 
+var mysolution1 = function(start, end, bank){
+    let bankset = new Set(bank);
+    if (!bankset.has(end)) return -1;
+
+    const queue = [[start, 0]], dna = ['A', 'C', 'G', 'T'];
+    while (queue.length){
+        
+    }
+}
+
 var solution1 = function(start, end, bank){
     let bankset = new Set(bank);
     if (!bankset.has(end)) return -1;
