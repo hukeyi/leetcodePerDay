@@ -10,38 +10,31 @@
  * @return {boolean}
  */
 var isPerfectSquare = function(num) {
-    return solution2(num);
+    return mysolution2(num);
 };
 
-// 暴力：3012ms
-// 1. 从1 - num，除以，如果商等于除数，则返回true
-// 2. 否则返回false
-var solution1 = function(num){
-    for (let i = 1; i <= Math.ceil(num / 2); i++){
-        if (num / i === i) return true;
-    } 
-    return false;
-}
+// binary search
+var mysolution1 = function(num){
+    if (num < 2) return true;
 
-var solution2 = function(num){
-    if (num < 2) return num;
-    let left = 2, right = Math.floor(num / 2), res;
+    let [left, right] = [2, num];
     while (left <= right){
-        let mid = Math.floor((left + right) / 2);
-        let res = mid * mid;
-        if (res === num) return true;
-        if (res < num) left = mid + 1;
+        const mid = left + Math.floor((right - left) / 2);
+        if (mid * mid === num) return true;
+        else if (mid * mid < num) left = mid + 1;
         else right = mid - 1;
     }
     return false;
 }
-// bald: 80ms
-// 牛顿
-var solution3 = function(num){
-    r = num;
-    while (r*r > num)
-        r = ((r + num/r) / 2) | 0;
-    return r*r == num;
+
+// newton
+var mysolution2 = function(num){
+    if (num < 2) return true;
+    let curr = num;
+    while (curr * curr > num){
+        curr = Math.floor((curr + num / curr) / 2);
+    }
+    return curr * curr === num;
 }
 // @lc code=end
 

@@ -12,14 +12,15 @@
 var mySqrt = function(x) {
     return solution2(x);
 };
-
 // binary search
 var solution1 = function(x){
     if (x === 0 || x === 1) return x;
 
     let [left, right] = [1, x];
+    // terminator condition: [right + 1, right],
+    // so, should return right instead of left
     while (left <= right){
-        const mid = Math.floor((left + right) / 2);
+        const mid = left + Math.floor((right - left) / 2);
         if (mid * mid === x) return mid;
         else if (mid * mid < x) left = mid + 1;
         else right = mid - 1;
@@ -27,14 +28,14 @@ var solution1 = function(x){
     return right;
 }
 
-// 牛顿迭代
+// newton
 var solution2 = function(x){
     if (x === 0 || x === 1) return x;
 
     let curr = 1;
     while (true){
         let pre = curr;
-        curr = (curr + x / curr)  / 2;
+        curr = (curr + x / curr) / 2;
         if (Math.abs(curr - pre) < 1e-6){
             return Math.trunc(curr);
         }

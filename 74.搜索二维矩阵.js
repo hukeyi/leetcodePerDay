@@ -11,36 +11,38 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    return solution1 (matrix, target);
+    return mysolution2 (matrix, target);
 };
 
-// 从右上角开始搜索
-var solution1 = function(matrix, target){
+// start from the right corner
+var mysolution1 = function(matrix, target){
     if (!matrix.length) return false;
-
     const row = matrix.length, col = matrix[0].length;
     for (let i = 0; i < row; i++){
         for (let j = col - 1; j >= 0; j--){
-            let tmp = matrix[i][j];
+            const tmp = matrix[i][j];
             if (tmp === target) return true;
-            else if (tmp > target) continue;
-            else break;
+            else if (tmp < target) break;
+            else continue;
         }
     }
     return false;
 }
 
 // binary search
-var solution2 = function(matrix, target){
+// see the whole matrix as a 1d array, then apply a binary search on it
+// the key points are 1) project the 2d cordinate to the 1d index
+var mysolution2 = function(matrix, target){
     if (!matrix.length) return false;
+
     const row = matrix.length, col = matrix[0].length, len = row * col;
     let left = 0, right = len - 1;
     while (left <= right){
-        const mid = Math.floor((left + right) / 2);
-        const i = Math.floor(mid / col), j = mid % col, tmp = matrix[i][j];
-        if (tmp === target) return true;
-        else if (tmp > target) right = mid - 1;
-        else left = mid + 1;
+        const mid = left + Math.floor((right - left) / 2)
+        const i = Math.floor(mid / col), j = mid % col;
+        if (matrix[i][j] === target) return true;
+        else if (matrix[i][j] < target) left = mid + 1;
+        else right = mid - 1;
     }
     return false;
 }
