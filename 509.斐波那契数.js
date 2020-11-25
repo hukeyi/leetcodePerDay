@@ -10,19 +10,27 @@
  * @return {number}
  */
 var fib = function(N) {
-    // const memo = new Map();
-    // return solution1 (N, memo);
-    return solution2(N);
+    return mysolution2(N);
 };
 
-// up to bottom
-// clever recursion
-var solution1 = function(n, memo){
-    if (n <= 1) return n;
-    if (!memo.has(n)){
-        memo.set(n, (solution1(n - 1, memo) + solution1(n - 2, memo)));
+var mysolution1 = function(n){
+    const memo = new Map();
+    const recur = function(n, memo){
+        if (n <= 1) return n;
+        if (!memo.has(n)){
+            memo.set(n, recur(n - 1, memo) + recur(n - 2, memo));
+        }
+        return memo.get(n);
     }
-    return memo.get(n);
+    return recur(n, memo);
+}
+
+var mysolution2 = function(n){
+    const dp = [0, 1];
+    for (let i = 2; i <= n; i++){
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    return dp[n];
 }
 
 // bottom up

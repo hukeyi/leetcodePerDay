@@ -11,37 +11,34 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    return mysolution2 (matrix, target);
+    return solution2 (matrix, target);
 };
 
 // start from the right corner
-var mysolution1 = function(matrix, target){
+var solution1 = function(matrix, target){
     if (!matrix.length) return false;
-    const row = matrix.length, col = matrix[0].length;
-    for (let i = 0; i < row; i++){
-        for (let j = col - 1; j >= 0; j--){
-            const tmp = matrix[i][j];
-            if (tmp === target) return true;
-            else if (tmp < target) break;
-            else continue;
+    const [rows, cols] = [matrix.length, matrix[0].length];
+    for (let i = 0; i < rows; i++){
+        for (let j = cols - 1; j >= 0; j--){
+            if (matrix[i][j] === target) return true;
+            else if (matrix[i][j] > target) continue;
+            else break;
         }
     }
     return false;
 }
 
 // binary search
-// see the whole matrix as a 1d array, then apply a binary search on it
-// the key points are 1) project the 2d cordinate to the 1d index
-var mysolution2 = function(matrix, target){
+// treat the whole 2d matrix as a 1d array
+var solution2 = function(matrix, target){
     if (!matrix.length) return false;
-
-    const row = matrix.length, col = matrix[0].length, len = row * col;
-    let left = 0, right = len - 1;
+    const [rows, cols] = [matrix.length, matrix[0].length];
+    let [left, right] = [0, rows * cols - 1];
     while (left <= right){
-        const mid = left + Math.floor((right - left) / 2)
-        const i = Math.floor(mid / col), j = mid % col;
-        if (matrix[i][j] === target) return true;
-        else if (matrix[i][j] < target) left = mid + 1;
+        const mid = left + Math.floor((right - left) / 2);
+        const tmp = matrix[Math.floor(mid / cols)][mid % cols];
+        if (target === tmp) return true;
+        else if (target > tmp) left = mid + 1;
         else right = mid - 1;
     }
     return false;
