@@ -10,10 +10,10 @@
  * @return {number}
  */
 var fib = function(N) {
-    return mysolution2(N);
+    return solution2(N);
 };
 
-var mysolution1 = function(n){
+var solution1 = function(n){
     const memo = new Map();
     const recur = function(n, memo){
         if (n <= 1) return n;
@@ -25,15 +25,6 @@ var mysolution1 = function(n){
     return recur(n, memo);
 }
 
-var mysolution2 = function(n){
-    const dp = [0, 1];
-    for (let i = 2; i <= n; i++){
-        dp[i] = dp[i - 1] + dp[i - 2];
-    }
-    return dp[n];
-}
-
-// bottom up
 var solution2 = function(n){
     const dp = [0, 1];
     for (let i = 2; i <= n; i++){

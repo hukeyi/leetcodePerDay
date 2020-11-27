@@ -10,19 +10,21 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    return mysolution3(nums);
+    return solution2(nums);
 };
 
 // hash
 var solution1 = function(nums){
-    const hash = {}, len = nums.length, bound = Math.floor(len / 2);
+    const hash = {}, len = nums.length, bound = Math.floor (len / 2);
     for (let i = 0; i < len; i++){
         hash[nums[i]] = nums[i] in hash ? hash[nums[i]] + 1 : 1;
-        if (hash[nums[i]] > bound) return nums[i];
+        if (hash[nums[i]] > bound){
+            return nums[i];
+        }
     }
 }
 
-// sort and find the mid number
+// sort and return the mid number
 var solution2 = function(nums){
     nums.sort((a, b) => a - b);
     return nums[Math.floor(nums.length / 2)];

@@ -11,10 +11,10 @@
  * @return {number}
  */
 var coinChange = function(coins, amount) {
-    return solution1 (coins, amount);
+    return mysolution1 (coins, amount);
 };
-// greedy + dfs
-var solution1 = function (coins, amount){
+
+var mysolution1 = function(coins, amount){
     if (amount === 0) return 0;
     coins.sort((a, b) => b - a);
     let ans = [Infinity];

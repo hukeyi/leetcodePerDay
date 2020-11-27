@@ -10,19 +10,17 @@
  * @return {number}
  */
 var rob = function(nums) {
-    return solution1(nums);
+    return mysolution1(nums);
 };
 
-var solution1 = function(nums){
+var mysolution1 = function(nums){
     const len = nums.length;
     if (len === 0) return 0;
     if (len === 1) return nums[0];
     const dp = function(nums){
-        let pre = cur = 0, tmp;
-        for(let num of nums){
-            tmp = cur;
-            cur = Math.max(pre + num, cur);
-            pre = tmp;
+        let pre = cur = 0;
+        for (let num of nums) {
+            [cur, pre] = [Math.max(pre + num, cur), cur];
         }
         return cur;
     }

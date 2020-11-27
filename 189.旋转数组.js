@@ -12,14 +12,28 @@
  */
 
 var rotate = function (nums, k){
-    solution2(nums, k);
+    mysolution2(nums, k);
 }
 
-// push and pop
-var solution1 = function (nums, k){
+var mysolution1 = function(nums, k){
     while (k--){
         nums.unshift(nums.pop());
     }
+}
+
+var reverse = function(nums, start, end){
+    while (start <= end){
+        [nums[start], nums[end]] = [nums[end], nums[start]];
+        start++; end--;
+    }
+}
+
+var mysolution2 = function(nums, k){
+    const len = nums.length;
+    k %= len;
+    reverse(nums, 0, len - 1);
+    reverse(nums, 0, k - 1);
+    reverse(nums, k, len - 1);
 }
 
 // reverse three times
