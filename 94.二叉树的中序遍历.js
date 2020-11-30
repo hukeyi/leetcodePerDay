@@ -17,26 +17,24 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var inorderTraversal1 = function (root){
-    if (!root) return [];
+// var inorderTraversal = function (root){
+//     if (!root) return [];
+//     const res = [];
+//     const inorder = function(root){
+//         if (!root) return;
+//         inorder (root.left);
+//         res.push(root.val);
+//         inorder(root.right);
+//     }
+//     inorder(root);
+//     return res;
+// }
 
-    let res = [];
-    const inorder = (root) => {
-        if (!root) return;
-        inorder(root.left);
-        res.push(root.val);
-        inorder(root.right);
-    }
-    inorder(root);
-    return res;
-}
-
-// 迭代
-var inorderTraversal = function (root){
-    let res = [];
+var inorderTraversal = function(root){
+    const res = [];
     if (!root) return res;
 
-    let stack = [];
+    const stack = [];
     while (root || stack.length){
         while (root){
             stack.push(root);

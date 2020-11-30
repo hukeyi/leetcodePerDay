@@ -10,10 +10,11 @@
  * @return {number}
  */
 var fib = function(N) {
-    return solution2(N);
+    return mysolution3(N);
 };
 
-var solution1 = function(n){
+// recursion
+var mysolution1 = function(n){
     const memo = new Map();
     const recur = function(n, memo){
         if (n <= 1) return n;
@@ -25,12 +26,25 @@ var solution1 = function(n){
     return recur(n, memo);
 }
 
-var solution2 = function(n){
+// dp
+var mysolution2 = function(n){
     const dp = [0, 1];
     for (let i = 2; i <= n; i++){
         dp[i] = dp[i - 1] + dp[i - 2];
     }
     return dp[n];
+}
+
+// dp and optimize the space complexity
+var mysolution3 = function(n){
+    if (n <= 1) return n;
+    let pre1 = 0, pre2 = 1, curr = 0;
+    while (--n){
+        curr = pre1 + pre2;
+        pre1 = pre2;
+        pre2 = curr;
+    }
+    return curr;
 }
 // @lc code=end
 

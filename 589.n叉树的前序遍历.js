@@ -18,15 +18,14 @@
  * @return {number[]}
  */
 var preorder = function(root) {
-    return solution2(root);
+    return mysolution1(root);
 };
 
-var solution1 = function (root){
+var mysolution2 = function(root){
     if (!root) return [];
-
-    let res = [];
-    const pre = (root) => {
-        if (!root) return;
+    const res = [];
+    const pre = function(root){
+        if (!root) return [];
         res.push(root.val);
         root.children.forEach(child => {
             pre(child);
@@ -36,18 +35,13 @@ var solution1 = function (root){
     return res;
 }
 
-var solution2 = function (root){
+var mysolution1 = function(root){
     if (!root) return [];
-
-    let res = [], stack = [];
-    stack.push(root);
-    while (stack.length){
-        let curr = stack.pop();
+    const res = [], queue = [root];
+    while (queue.length){
+        let curr = queue.shift();
         res.push(curr.val);
-        let num = curr.children.length;
-        while (num--){
-            stack.push(curr.children[num]);
-        }
+        queue.unshift(...curr.children);
     }
     return res;
 }

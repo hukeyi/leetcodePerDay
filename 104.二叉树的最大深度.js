@@ -17,18 +17,22 @@
  * @return {number}
  */
 // 递归
-var maxDepth = function (root){
-    if (!root) return 0;
-    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
-}
+// var maxDepth = function (root){
+//     if (!root) return 0;
+//     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+// }
 
-// 迭代
-var maxDepth = function (root){
+// recursion
+// var maxDepth = function(root){
+//     if (!root) return 0;
+//     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+// }
+
+var maxDepth = function(root){
     if (!root) return 0;
 
-    let queue = [];
+    const queue = [root];
     let ans = 0;
-    queue.push(root);
     while (queue.length){
         let num = queue.length;
         while (num--){

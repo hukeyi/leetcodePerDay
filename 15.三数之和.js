@@ -10,7 +10,7 @@
  * @return {number[][]}
  */
 var threeSum = function(nums) {
-    return mysolution3(nums);
+    return mysolution2(nums);
 };
 
 // 暴力 超时
@@ -36,10 +36,9 @@ var mysolution1 = function(nums){
     return res;
 }
 
-var mysolution3 = function (nums){
-    nums.sort((a, b) => { return a - b; });
-    const len = nums.length;
-    let res = [];
+var mysolution2 = function(nums){
+    nums.sort((a, b) => a - b);
+    const len = nums.length, res = [];
     for (let k = 0; k < len - 2; k++){
         if (nums[k] > 0) break;
         if (k > 0 && nums[k] === nums[k - 1]) continue;
