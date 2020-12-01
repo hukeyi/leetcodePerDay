@@ -10,11 +10,10 @@
  * @return {number}
  */
 var fib = function(N) {
-    return mysolution3(N);
+    return solution3(N);
 };
-
-// recursion
-var mysolution1 = function(n){
+// recursion and memorize search
+var solution1 = function(n){
     const memo = new Map();
     const recur = function(n, memo){
         if (n <= 1) return n;
@@ -27,7 +26,7 @@ var mysolution1 = function(n){
 }
 
 // dp
-var mysolution2 = function(n){
+var solution2 = function(n){
     const dp = [0, 1];
     for (let i = 2; i <= n; i++){
         dp[i] = dp[i - 1] + dp[i - 2];
@@ -35,8 +34,8 @@ var mysolution2 = function(n){
     return dp[n];
 }
 
-// dp and optimize the space complexity
-var mysolution3 = function(n){
+// dp with space optimizition
+var solution3 = function(n){
     if (n <= 1) return n;
     let pre1 = 0, pre2 = 1, curr = 0;
     while (--n){
