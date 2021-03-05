@@ -1,4 +1,3 @@
-
 /*
  * @lc app=leetcode.cn id=24 lang=javascript
  *
@@ -17,31 +16,39 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-// 递归
-// var swapPairs = function(head){
-//     if (!head || !head.next) return head;
+// recursive
+var swapPairs = function (head) {
+	return solution2(head);
+};
 
-//     let node1 = head, node2 = head.next, node3 = node2.next;
-//     node2.next = node1;
-//     node1.next = swapPairs(node3);
-//     return node2;
-// }
+var solution1 = function (head) {
+	const recur = function (head) {
+		if (!head || !head.next) return head;
+
+		let [node1, node2, node3] = [head, head.next, head.next.next];
+		node2.next = node1;
+		node1.next = recur(node3);
+		return node2;
+	};
+	return recur(head);
+};
 
 // 迭代
-var swapPairs = function(head){
-    if (!head || !head.next) return head;
+var solution2 = function (head) {
+	if (!head || !head.next) return head;
 
-    let dummy = new ListNode();
-    dummy.next = head;
-    let curr = dummy;
-    while (curr.next && curr.next.next){
-        let node1 = curr.next, node2 = curr.next.next, node3 = node2.next;
-        node1.next = node3;
-        curr.next = node2;
-        node2.next = node1;
-        curr = node1;
-    }
-    return dummy.next;
-}
+	let dummy = new ListNode();
+	dummy.next = head;
+	let curr = dummy;
+	while (curr.next && curr.next.next) {
+		let node1 = curr.next,
+			node2 = curr.next.next,
+			node3 = node2.next;
+		node1.next = node3;
+		curr.next = node2;
+		node2.next = node1;
+		curr = node1;
+	}
+	return dummy.next;
+};
 // @lc code=end
-
