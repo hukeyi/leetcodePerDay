@@ -18,32 +18,34 @@
  * @return {ListNode}
  */
 var detectCycle = function (head) {
-	return solution1(head);
+	return solu2(head);
 };
+
+// 1. fast and slow pointers
 // 设a为从head到环形入口前的节点步数
 // b为环形内的节点数
-var solution1 = function (head) {
-	let slow = head,
-		fast = head;
-	// 移动快慢指针，慢针走nb步
-	while (true) {
-		if (!fast || !fast.next) return null;
+var solu1 = function (head) {
+	let slow = (fast = head);
+	do {
+		// 移动快慢指针，慢针走nb步
+		if (!fast || !fast.next) return null; //没有环
 		slow = slow.next;
 		fast = fast.next.next;
-		if (slow === fast) break;
-	}
+	} while (slow !== fast);
 	// 从头开始移针，走a步
 	// 此时慢针一共走a+nb步，一定会停在入口节点处
 	fast = head;
-	while (fast !== slow) {
+	while (slow !== fast) {
 		slow = slow.next;
 		fast = fast.next;
 	}
 	return fast;
 };
 
-var solution2 = function (head) {
-	let set = new Set();
+// 2. use Set
+// return the first one that duplicated
+var solu2 = function (head) {
+	const set = new Set();
 	while (head) {
 		if (set.has(head)) return head;
 		set.add(head);
