@@ -10,24 +10,25 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function (nums) {
-	// return mysolution3(nums);
-	return solution2(nums);
+	return solu2(nums);
 };
-// 删+加零
-var solution1 = function (nums) {
+
+// 1. 删所有零，在末尾加上
+var solu1 = function (nums) {
 	let len = nums.length;
-	let j = 0;
+	let i = 0;
 	while (len--) {
-		if (nums[j] === 0) {
-			nums.splice(j, 1);
+		if (nums[i] === 0) {
+			nums.splice(i, 1);
 			nums.push(0);
 		} else {
-			j++;
+			i++;
 		}
 	}
 };
-
-var solution2 = function (nums) {
+// 2. 双指针，j指向非零的最后一位，i遍历数组
+// 非零往前挪
+var solu2 = function (nums) {
 	const len = nums.length;
 	let j = 0;
 	for (let i = 0; i < len; i++) {
@@ -35,44 +36,5 @@ var solution2 = function (nums) {
 			[nums[i], nums[j++]] = [nums[j], nums[i]];
 		}
 	}
-};
-
-// 非零往前挪，挪完后面全为零
-// i负责遍历数组，j负责指向下一个非零元素
-var solu2 = function (nums) {
-	const len = nums.length;
-	let j = 0;
-	for (let i = 0; i < len; i++) {
-		if (nums[i] !== 0) {
-			nums[j] = nums[i];
-			if (i !== j) {
-				nums[i] = 0;
-			}
-			j++;
-		}
-	}
-};
-
-// 93.21 15.55
-var mySolution = function (nums) {
-	const len = nums.length;
-	let countZero = 0;
-	nums.forEach((num) => {
-		if (num === 0) countZero++;
-	});
-	const countNotZero = len - countZero;
-	let pos = 0;
-	for (let i = 0; i < len; i++) {
-		if (nums[i] !== 0) {
-			nums[pos++] = nums[i];
-		}
-		if (pos >= countNotZero) {
-			while (pos < len) {
-				nums[pos++] = 0;
-			}
-			break;
-		}
-	}
-	return nums;
 };
 // @lc code=end

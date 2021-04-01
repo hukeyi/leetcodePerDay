@@ -12,40 +12,40 @@
  */
 // my solution
 var twoSum = function (nums, target) {
-	return solution2(nums, target);
+	return solu3(nums, target);
 };
 
-var solution1 = function (nums, target) {
+// 1. brute force use indexOf()
+var solu1 = function (nums, target) {
 	const len = nums.length;
-	for (let i = 0; i < len - 1; i++) {
+	for (let i = 0; i < len; i++) {
+		const index = nums.indexOf(target - nums[i]);
+		if (index !== -1 && index !== i) {
+			return [i, index];
+		}
+	}
+};
+// 2. brute force use for-loop
+var solu2 = function (nums, target) {
+	const len = nums.length;
+	for (let i = 0; i < len; i++) {
+		const other = target - nums[i];
 		for (let j = i + 1; j < len; j++) {
-			if (nums[i] + nums[j] === target) {
-				return [i, j];
-			}
+			if (other === nums[j]) return [i, j];
 		}
 	}
 };
 
-// 键为值，值为数组下标
-var solution2 = function (nums, target) {
+// 3. hash
+var solu3 = function (nums, target) {
 	const len = nums.length;
 	const hash = {};
 	for (let i = 0; i < len; i++) {
-		let other = target - nums[i];
+		const other = target - nums[i];
 		if (other in hash) {
 			return [i, hash[other]];
 		}
 		hash[nums[i]] = i;
-	}
-};
-
-var solu3 = function (nums, target) {
-	const len = nums.length;
-	for (let i = len; i >= 0; i--) {
-		const index = nums.indexOf(target - nums[i]);
-		if (index !== -1 && index !== i) {
-			return [index, i];
-		}
 	}
 };
 // @lc code=end
