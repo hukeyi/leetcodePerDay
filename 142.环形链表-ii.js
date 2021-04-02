@@ -20,7 +20,6 @@
 var detectCycle = function (head) {
 	return solu2(head);
 };
-
 // 1. fast and slow pointers
 // 设a为从head到环形入口前的节点步数
 // b为环形内的节点数

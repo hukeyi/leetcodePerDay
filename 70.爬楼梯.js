@@ -11,28 +11,25 @@
  */
 
 var climbStairs = function (n) {
-	return solu4(n);
+	return solution4(n);
 };
-// 递归
-var solu1 = function (n) {
+// 1. 递归, time exceeded
+var solution1 = function (n) {
 	if (n <= 0) return 0;
 	if (n <= 2) return n;
 
-	return solu1(n - 1) + solu1(n - 2);
+	return solution1(n - 1) + solution1(n - 2);
 };
-
-// 迭代
-var solu2 = function (n) {
-	const dp = [];
-	dp[0] = dp[1] = 1;
+// 2. 迭代，动态规划
+var solution2 = function (n) {
+	const dp = [1, 1];
 	for (let i = 2; i <= n; i++) {
 		dp[i] = dp[i - 1] + dp[i - 2];
 	}
 	return dp[n];
 };
-
-// 神奇方法
-var solu3 = function (n) {
+// 3. double pointers
+var solution3 = function (n) {
 	if (n <= 0) return 0;
 	if (n <= 2) return n;
 
@@ -41,6 +38,18 @@ var solu3 = function (n) {
 		a = (b += a) - a;
 	}
 	return a;
+};
+// 4. double pointers
+var solution4 = function (n) {
+	if (n <= 0) return 0;
+	if (n <= 2) return n;
+
+	let oneStep = (twoSteps = 1),
+		allWay = 2;
+	for (let i = 3; i <= n; i++) {
+		[oneStep, twoSteps, allWay] = [twoSteps, allWay, twoSteps + allWay];
+	}
+	return allWay;
 };
 
 var solu4 = function (n) {

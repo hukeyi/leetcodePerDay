@@ -10,7 +10,7 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function (nums) {
-	return solu2(nums);
+	return solution2(nums);
 };
 
 // 1. 删所有零，在末尾加上

@@ -18,7 +18,7 @@
  */
 // recursive
 var swapPairs = function (head) {
-	return solution2(head);
+	return solu2(head);
 };
 
 // 递归

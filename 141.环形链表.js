@@ -18,29 +18,30 @@
  * @return {boolean}
  */
 var hasCycle = function (head) {
-	return solu2(head);
+	return solution2(head);
 };
 
-// 1. set 判重
-var solu1 = function (head) {
+// 1. set
+var solution1 = function (head) {
 	const set = new Set();
 	while (head) {
 		if (set.has(head)) return true;
+
 		set.add(head);
 		head = head.next;
 	}
 	return false;
 };
-// 2. slow and fast pointers
-var solu2 = function (head) {
+// 2. double pointers
+var solution2 = function (head) {
 	if (!head || !head.next) return false;
 	let slow = head,
-		fast = head;
-	do {
+		fast = head.next;
+	while (slow !== fast) {
 		if (!fast || !fast.next) return false;
 		slow = slow.next;
 		fast = fast.next.next;
-	} while (slow !== fast);
+	}
 	return true;
 };
 // @lc code=end

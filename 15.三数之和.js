@@ -10,8 +10,9 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-	return solution2(nums);
+	return solu2(nums);
 };
+
 // 1. sort and brute force 3 loops
 var solution1 = function (nums) {
 	nums.sort((a, b) => a - b);

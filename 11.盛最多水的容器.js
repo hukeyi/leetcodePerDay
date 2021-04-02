@@ -10,9 +10,8 @@
  * @return {number}
  */
 var maxArea = function (height) {
-	return solution2(height);
+	return solu2(height);
 };
-
 // 1. brute force time exceeded
 var solution1 = function (heights) {
 	const len = heights.length;

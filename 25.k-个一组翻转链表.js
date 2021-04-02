@@ -18,7 +18,7 @@
  * @return {ListNode}
  */
 var reverseKGroup = function (head, k) {
-	return solution1(head, k);
+	return solu1(head, k);
 };
 
 var flip = function (head) {
